@@ -41,6 +41,7 @@ dependencies:
   firebase_messaging: ^14.5.0
   cloud_firestore: ^4.6.0
   collection: ^1.17.0
+  event_bus_plus: ^0.6.1
 
 dev_dependencies:
   flutter_test:
