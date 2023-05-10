@@ -1,20 +1,34 @@
 class Paket {
+  final String id;
   final String nama;
   final String? photo;
   final List<PilihanPaket> pilihan;
   final int baseHarga;
 
   const Paket({
+    required this.id,
     required this.nama,
     this.photo,
     required this.pilihan,
     required this.baseHarga,
   });
 
-  Paket.fromJson(Map<String, dynamic> json)
+  Paket copyWith(String id) {
+    return Paket(
+      id: id,
+      nama: nama,
+      photo: photo,
+      pilihan: pilihan,
+      baseHarga: baseHarga,
+    );
+  }
+
+  Paket.fromJson(this.id, Map<String, dynamic> json)
       : nama = json['nama'],
         photo = json['photo'],
-        pilihan = [], // pilihan diisi nanti karena butuh fetch dari firestore
+        pilihan = (json['pilihan'] as List<dynamic>)
+            .map((e) => PilihanPaket.fromJson(e))
+            .toList(),
         baseHarga = json['baseHarga'];
 
   Map<String, dynamic> toJson() {
@@ -44,7 +58,9 @@ class PilihanPaket {
       : nama = json['nama'],
         minimal = json['minimal'],
         maksimal = json['maksimal'],
-        makanan = []; // makanan diisi nanti karena butuh fetch dari firestore
+        makanan = (json['makanan'] as List<dynamic>)
+            .map((e) => Makanan.fromJson(e))
+            .toList();
 
   Map<String, dynamic> toJson() {
     return {
