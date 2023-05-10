@@ -1,14 +1,12 @@
 class Paket {
   final String id;
   final String nama;
-  final String? photo;
   final List<PilihanPaket> pilihan;
   final int baseHarga;
 
   const Paket({
     required this.id,
     required this.nama,
-    this.photo,
     required this.pilihan,
     required this.baseHarga,
   });
@@ -17,7 +15,6 @@ class Paket {
     return Paket(
       id: id,
       nama: nama,
-      photo: photo,
       pilihan: pilihan,
       baseHarga: baseHarga,
     );
@@ -25,7 +22,6 @@ class Paket {
 
   Paket.fromJson(this.id, Map<String, dynamic> json)
       : nama = json['nama'],
-        photo = json['photo'],
         pilihan = (json['pilihan'] as List<dynamic>)
             .map((e) => PilihanPaket.fromJson(e))
             .toList(),
@@ -34,7 +30,6 @@ class Paket {
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
-      'photo': photo,
       'pilihan': pilihan.map((e) => e.toJson()).toList(),
       'baseHarga': baseHarga,
     };
@@ -73,24 +68,20 @@ class PilihanPaket {
 
 class Makanan {
   final String nama;
-  final String? photo;
   final int harga;
 
   const Makanan({
     required this.nama,
-    this.photo,
     required this.harga,
   });
 
   Makanan.fromJson(Map<String, dynamic> json)
       : nama = json['nama'],
-        photo = json['photo'],
         harga = json['harga'];
 
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
-      'photo': photo,
       'harga': harga,
     };
   }
