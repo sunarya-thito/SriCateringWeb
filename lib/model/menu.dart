@@ -14,9 +14,7 @@ class Paket {
   Paket.fromJson(Map<String, dynamic> json)
       : nama = json['nama'],
         photo = json['photo'],
-        pilihan = (json['pilihan'] as List<dynamic>)
-            .map((e) => PilihanPaket.fromJson(e))
-            .toList(),
+        pilihan = [], // pilihan diisi nanti karena butuh fetch dari firestore
         baseHarga = json['baseHarga'];
 
   Map<String, dynamic> toJson() {
@@ -46,16 +44,13 @@ class PilihanPaket {
       : nama = json['nama'],
         minimal = json['minimal'],
         maksimal = json['maksimal'],
-        makanan = (json['makanan'] as List<dynamic>)
-            .map((e) => Makanan.fromJson(e))
-            .toList();
+        makanan = []; // makanan diisi nanti karena butuh fetch dari firestore
 
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
       'minimal': minimal,
       'maksimal': maksimal,
-      'makanan': makanan.map((e) => e.toJson()).toList(),
     };
   }
 }
