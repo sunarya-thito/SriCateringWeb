@@ -22,8 +22,12 @@ class PageItem {
 class _AdminPageState extends State<AdminPage> {
   final List<PageItem> pages = const [
     PageItem(
-      label: 'Manage',
+      label: 'Manage Paket',
       page: ManagePage(),
+    ),
+    PageItem(
+      label: 'Manage Makanan',
+      page: Text('Manage Makanan'),
     ),
     PageItem(
       label: 'Pemesanan',
