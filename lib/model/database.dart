@@ -1,5 +1,43 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:sricatering/model/menu.dart';
+import 'package:event_bus_plus/event_bus_plus.dart';
+
+IEventBus databaseEventBus = EventBus();
+
+class PaketListUpdated extends AppEvent {
+  final List<Paket> pakets;
+
+  PaketListUpdated(this.pakets);
+
+  @override
+  List<Object?> get props => pakets;
+}
+
+void initializeDatabase() {
+  // listen for database changes
+  final db = FirebaseFirestore.instance;
+  final colRef = db.collection('paket');
+  colRef.snapshots().listen((snapshot) {
+    final pakets = snapshot.docs.map((doc) {
+      return Paket.fromJson(doc.id, doc.data());
+    }).toList();
+    databaseEventBus.fire(PaketListUpdated(pakets));
+  });
+}
+
+Future<Widget> getImageOfPaket(Paket paket) async {
+  // dapatkan url gambar dari paket
+  final storage = FirebaseStorage.instance;
+  final ref = storage.ref().child('paket/${paket.id}.jpg');
+  try {
+    final downloadUrl = await ref.getDownloadURL();
+    return Image(image: NetworkImage(downloadUrl));
+  } catch (e) {
+    return const Icon(Icons.image);
+  }
+}
 
 Future<List<Paket>> fetchDaftarPaket() {
   // fetch daftar paket dari firestore
