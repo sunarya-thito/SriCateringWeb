@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:sricatering/admin/manage_page.dart';
+import 'package:sricatering/admin/manage_paket_page.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -23,11 +23,7 @@ class _AdminPageState extends State<AdminPage> {
   final List<PageItem> pages = const [
     PageItem(
       label: 'Manage Paket',
-      page: ManagePage(),
-    ),
-    PageItem(
-      label: 'Manage Makanan',
-      page: Text('Manage Makanan'),
+      page: ManagePaketPage(),
     ),
     PageItem(
       label: 'Pemesanan',
