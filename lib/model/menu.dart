@@ -15,6 +15,16 @@ class Paket {
     required this.deskripsi,
   });
 
+  String? validasi() {
+    if (nama.isEmpty) return 'Nama Paket tidak boleh kosong';
+    if (baseHarga < 0) return 'Harga Paket tidak boleh negatif';
+    for (var p in pilihan) {
+      var err = p.validasi();
+      if (err != null) return err;
+    }
+    return null;
+  }
+
   Paket copyWith(String id) {
     return Paket(
       id: id,
@@ -27,9 +37,11 @@ class Paket {
 
   Paket.fromJson(this.id, Map<String, dynamic> json)
       : nama = json['nama'],
-        pilihan = (json['pilihan'] as List<dynamic>)
-            .map((e) => PilihanPaket.fromJson(e))
-            .toList(),
+        pilihan = json['pilihan']
+                ?.map((e) => PilihanPaket.fromJson(e))
+                .cast<PilihanPaket>()
+                .toList() ??
+            [],
         baseHarga = json['baseHarga'],
         deskripsi = json['deskripsi'];
 
@@ -62,6 +74,11 @@ class Paket {
         baseHarga.hashCode ^
         deskripsi.hashCode;
   }
+
+  @override
+  String toString() {
+    return 'Paket(id: $id, nama: $nama, pilihan: $pilihan, baseHarga: $baseHarga, deskripsi: $deskripsi)';
+  }
 }
 
 class PilihanPaket {
@@ -76,6 +93,21 @@ class PilihanPaket {
     required this.maksimal,
     required this.makanan,
   });
+
+  String? validasi() {
+    if (nama.isEmpty) return 'Nama Pilihan tidak boleh kosong';
+    if (minimal < 0) return 'Minimal tidak boleh negatif';
+    if (maksimal < 0) return 'Maksimal tidak boleh negatif';
+    if (maksimal < minimal) {
+      return 'Maksimal tidak boleh lebih kecil dari minimal';
+    }
+    if (makanan.isEmpty) return 'Pilihan harus memiliki makanan';
+    for (var m in makanan) {
+      var err = m.validasi();
+      if (err != null) return err;
+    }
+    return null;
+  }
 
   // buat copyWith
   PilihanPaket copyWith({
@@ -108,20 +140,28 @@ class PilihanPaket {
       : nama = json['nama'],
         minimal = json['minimal'],
         maksimal = json['maksimal'],
-        makanan = (json['makanan'] as List<dynamic>)
-            .map((e) => Makanan.fromJson(e))
-            .toList();
+        makanan = json['makanan']
+                ?.map((e) => Makanan.fromJson(e))
+                .toList()
+                .cast<Makanan>() ??
+            [];
 
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
       'minimal': minimal,
       'maksimal': maksimal,
+      'makanan': makanan.map((e) => e.toJson()).toList(),
     };
   }
 
   @override
   int get hashCode => nama.hashCode ^ minimal.hashCode ^ maksimal.hashCode;
+
+  @override
+  String toString() {
+    return 'PilihanPaket(nama: $nama, minimal: $minimal, maksimal: $maksimal, makanan: $makanan)';
+  }
 }
 
 class Makanan {
@@ -132,6 +172,12 @@ class Makanan {
     required this.nama,
     required this.harga,
   });
+
+  String? validasi() {
+    if (nama.isEmpty) return 'Nama Makanan tidak boleh kosong';
+    if (harga < 0) return 'Harga tidak boleh negatif';
+    return null;
+  }
 
   Makanan copyWith({
     String? nama,
@@ -163,4 +209,7 @@ class Makanan {
 
   @override
   int get hashCode => nama.hashCode ^ harga.hashCode;
+
+  @override
+  String toString() => 'Makanan(nama: $nama, harga: $harga)';
 }
