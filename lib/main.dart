@@ -1,15 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sricatering/firebase_options.dart';
+import 'package:sricatering/model/database.dart';
 import 'package:sricatering/routes.dart';
 
-void main() {
-  // for web, use URLStrategy
-  // initialize firebase
-  // usePathUrlStrategy();
-  Firebase.initializeApp(
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  initializeDatabase();
   runApp(const MyApp());
 }
 
@@ -23,9 +23,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      // use Material3 theme
+      theme: ThemeData.dark(useMaterial3: true),
     );
   }
 }
