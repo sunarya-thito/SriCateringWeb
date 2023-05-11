@@ -3,12 +3,14 @@ class Paket {
   final String nama;
   final List<PilihanPaket> pilihan;
   final int baseHarga;
+  final String deskripsi;
 
   const Paket({
     required this.id,
     required this.nama,
     required this.pilihan,
     required this.baseHarga,
+    required this.deskripsi,
   });
 
   Paket copyWith(String id) {
@@ -25,13 +27,15 @@ class Paket {
         pilihan = (json['pilihan'] as List<dynamic>)
             .map((e) => PilihanPaket.fromJson(e))
             .toList(),
-        baseHarga = json['baseHarga'];
+        baseHarga = json['baseHarga'],
+        deskripsi = json['deskripsi'];
 
   Map<String, dynamic> toJson() {
     return {
       'nama': nama,
       'pilihan': pilihan.map((e) => e.toJson()).toList(),
       'baseHarga': baseHarga,
+      'deskripsi': deskripsi,
     };
   }
 }
