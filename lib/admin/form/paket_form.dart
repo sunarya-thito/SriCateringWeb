@@ -31,7 +31,7 @@ class _PaketFormState extends State<PaketForm> {
     if (paket != null) {
       name.text = paket.nama;
       price.text = paket.baseHarga.toString();
-      description.text = paket.nama;
+      description.text = paket.deskripsi;
 
       pilihan.addAll(paket.pilihan);
     }
@@ -109,6 +109,9 @@ class _PaketFormState extends State<PaketForm> {
                       content: Text(validasi),
                     ),
                   );
+                  Future.delayed(Duration(milliseconds: 500), () {
+                    context.go('/admin/manage_paket');
+                  },);
                   return;
                 }
                 showLoadingOverlay(
@@ -126,6 +129,9 @@ class _PaketFormState extends State<PaketForm> {
                           content: Text('Berhasil mengubah paket'),
                         ),
                       );
+                      Future.delayed(Duration(milliseconds: 500), () {
+                        context.go('/admin/manage_paket');
+                      },);
                     }));
               } else {
                 // edit paket
