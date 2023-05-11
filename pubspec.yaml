@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore: ^4.6.0
   collection: ^1.17.0
   event_bus_plus: ^0.6.1
+  go_router: ^7.0.0
 
 dev_dependencies:
   flutter_test:
