@@ -69,7 +69,11 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Nama Pilihan', maxLines: 1, overflow: TextOverflow.fade,),
+                        Text(
+                          'Nama Pilihan',
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
+                        ),
                         TextFormField(
                           controller: name,
                           decoration: const InputDecoration(
@@ -94,7 +98,11 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                   Flexible(
                     child: Column(
                       children: [
-                        Text('Minimal Pilih', maxLines: 1, overflow: TextOverflow.fade,),
+                        Text(
+                          'Minimal Pilih',
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
+                        ),
                         TextFormField(
                           controller: min,
                           keyboardType: TextInputType.number,
@@ -124,7 +132,11 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                   Flexible(
                     child: Column(
                       children: [
-                        Text('Maksimal Pilih', maxLines: 1, overflow: TextOverflow.fade,),
+                        Text(
+                          'Maksimal Pilih',
+                          maxLines: 1,
+                          overflow: TextOverflow.fade,
+                        ),
                         TextFormField(
                           controller: max,
                           keyboardType: TextInputType.number,
