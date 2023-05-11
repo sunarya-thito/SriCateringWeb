@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 class Paket {
   final String id;
   final String nama;
@@ -39,6 +41,27 @@ class Paket {
       'deskripsi': deskripsi,
     };
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Paket &&
+        other.id == id &&
+        other.nama == nama &&
+        listEquals(other.pilihan, pilihan) &&
+        other.baseHarga == baseHarga &&
+        other.deskripsi == deskripsi;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        nama.hashCode ^
+        pilihan.hashCode ^
+        baseHarga.hashCode ^
+        deskripsi.hashCode;
+  }
 }
 
 class PilihanPaket {
@@ -53,6 +76,33 @@ class PilihanPaket {
     required this.maksimal,
     required this.makanan,
   });
+
+  // buat copyWith
+  PilihanPaket copyWith({
+    String? nama,
+    int? minimal,
+    int? maksimal,
+    List<Makanan>? makanan,
+  }) {
+    return PilihanPaket(
+      nama: nama ?? this.nama,
+      minimal: minimal ?? this.minimal,
+      maksimal: maksimal ?? this.maksimal,
+      makanan: makanan ?? this.makanan,
+    );
+  }
+
+  // overload ==
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is PilihanPaket &&
+        other.nama == nama &&
+        other.minimal == minimal &&
+        other.maksimal == maksimal &&
+        listEquals(other.makanan, makanan);
+  }
 
   PilihanPaket.fromJson(Map<String, dynamic> json)
       : nama = json['nama'],
@@ -69,6 +119,9 @@ class PilihanPaket {
       'maksimal': maksimal,
     };
   }
+
+  @override
+  int get hashCode => nama.hashCode ^ minimal.hashCode ^ maksimal.hashCode;
 }
 
 class Makanan {
@@ -80,6 +133,16 @@ class Makanan {
     required this.harga,
   });
 
+  Makanan copyWith({
+    String? nama,
+    int? harga,
+  }) {
+    return Makanan(
+      nama: nama ?? this.nama,
+      harga: harga ?? this.harga,
+    );
+  }
+
   Makanan.fromJson(Map<String, dynamic> json)
       : nama = json['nama'],
         harga = json['harga'];
@@ -90,4 +153,14 @@ class Makanan {
       'harga': harga,
     };
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Makanan && other.nama == nama && other.harga == harga;
+  }
+
+  @override
+  int get hashCode => nama.hashCode ^ harga.hashCode;
 }
