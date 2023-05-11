@@ -109,12 +109,6 @@ class _PaketFormState extends State<PaketForm> {
                       content: Text(validasi),
                     ),
                   );
-                  Future.delayed(
-                    Duration(milliseconds: 500),
-                    () {
-                      context.go('/admin/manage_paket');
-                    },
-                  );
                   return;
                 }
                 showLoadingOverlay(
@@ -170,6 +164,12 @@ class _PaketFormState extends State<PaketForm> {
                         SnackBar(
                           content: Text('Berhasil mengubah paket'),
                         ),
+                      );
+                      Future.delayed(
+                        Duration(milliseconds: 500),
+                        () {
+                          context.go('/admin/manage_paket');
+                        },
                       );
                     }));
               }
