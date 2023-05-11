@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +41,13 @@ Future<Widget> getImageOfPaket(Paket paket) async {
   }
 }
 
+Future<void> updateImageOfPaket(Paket paket, Uint8List list) async {
+  // update gambar paket
+  final storage = FirebaseStorage.instance;
+  final ref = storage.ref().child('paket/${paket.id}.jpg');
+  await ref.putData(list);
+}
+
 Future<List<Paket>> fetchDaftarPaket() {
   // fetch daftar paket dari firestore
   final db = FirebaseFirestore.instance;
@@ -47,6 +56,15 @@ Future<List<Paket>> fetchDaftarPaket() {
     return snapshot.docs.map((doc) {
       return Paket.fromJson(doc.id, doc.data());
     }).toList();
+  });
+}
+
+Future<Paket> fetchPaket(String id) {
+  // fetch paket dari firestore
+  final db = FirebaseFirestore.instance;
+  final colRef = db.collection('paket');
+  return colRef.doc(id).get().then((doc) {
+    return Paket.fromJson(doc.id, doc.data()!);
   });
 }
 
