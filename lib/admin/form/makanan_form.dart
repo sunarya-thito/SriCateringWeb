@@ -55,7 +55,7 @@ class _MakananFormState extends State<MakananForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Nama Makanan'),
+                    Text('Nama Makanan', maxLines: 1, overflow: TextOverflow.fade,),
                     TextFormField(
                       controller: name,
                       validator: (value) {
@@ -80,7 +80,7 @@ class _MakananFormState extends State<MakananForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Harga'),
+                    Text('Harga', maxLines: 1, overflow: TextOverflow.fade,),
                     TextFormField(
                       controller: price,
                       keyboardType: TextInputType.number,
