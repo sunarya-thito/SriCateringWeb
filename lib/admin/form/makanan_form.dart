@@ -59,6 +59,7 @@ class _MakananFormState extends State<MakananForm> {
                       'Nama Makanan',
                       maxLines: 1,
                       overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
                     TextFormField(
                       controller: name,
@@ -88,6 +89,7 @@ class _MakananFormState extends State<MakananForm> {
                       'Harga',
                       maxLines: 1,
                       overflow: TextOverflow.fade,
+                      softWrap: false,
                     ),
                     TextFormField(
                       controller: price,

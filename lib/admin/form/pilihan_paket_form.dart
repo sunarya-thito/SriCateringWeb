@@ -73,6 +73,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                           'Nama Pilihan',
                           maxLines: 1,
                           overflow: TextOverflow.fade,
+                          softWrap: false,
                         ),
                         TextFormField(
                           controller: name,
@@ -102,6 +103,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                           'Minimal Pilih',
                           maxLines: 1,
                           overflow: TextOverflow.fade,
+                          softWrap: false,
                         ),
                         TextFormField(
                           controller: min,
@@ -136,6 +138,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                           'Maksimal Pilih',
                           maxLines: 1,
                           overflow: TextOverflow.fade,
+                          softWrap: false,
                         ),
                         TextFormField(
                           controller: max,
