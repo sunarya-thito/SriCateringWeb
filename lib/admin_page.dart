@@ -1,37 +1,49 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sricatering/admin/manage_paket_page.dart';
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({Key? key}) : super(key: key);
+  final int selectedIndex;
+  const AdminPage({Key? key, this.selectedIndex = 0}) : super(key: key);
 
   @override
   _AdminPageState createState() => _AdminPageState();
 }
 
 class PageItem {
+  final String path;
   final String label;
   final Widget page;
 
   const PageItem({
+    required this.path,
     required this.label,
     required this.page,
   });
 }
 
-class _AdminPageState extends State<AdminPage> {
-  final List<PageItem> pages = const [
-    PageItem(
-      label: 'Manage Paket',
-      page: ManagePaketPage(),
-    ),
-    PageItem(
-      label: 'Pemesanan',
-      page: Text('Pemesanan'),
-    ),
-  ];
+const List<PageItem> adminPages = [
+  PageItem(
+    path: 'manage_paket',
+    label: 'Manage Paket',
+    page: ManagePaketPage(),
+  ),
+  PageItem(
+    path: 'pemesanan',
+    label: 'Pemesanan',
+    page: Text('Pemesanan'),
+  ),
+];
 
+class _AdminPageState extends State<AdminPage> {
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.selectedIndex;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +57,14 @@ class _AdminPageState extends State<AdminPage> {
               ),
               child: Text('SRI CATERING'),
             ),
-            ...pages.mapIndexed((index, item) {
+            ...adminPages.mapIndexed((index, item) {
               return ListTile(
                 title: Text(item.label),
                 selected: index == _selectedIndex,
                 onTap: () {
                   setState(() {
                     _selectedIndex = index;
+                    context.pushReplacement('/admin/${item.path}');
                   });
                   Navigator.pop(context);
                 },
@@ -67,7 +80,7 @@ class _AdminPageState extends State<AdminPage> {
         ),
       ),
       appBar: AppBar(
-        title: Text('SRI CATERING - ${pages[_selectedIndex].label}'),
+        title: Text('SRI CATERING - ${adminPages[_selectedIndex].label}'),
         leading: Builder(builder: (context) {
           return IconButton(
             icon: const Icon(Icons.menu),
@@ -78,7 +91,7 @@ class _AdminPageState extends State<AdminPage> {
           );
         }),
       ),
-      body: pages[_selectedIndex].page,
+      body: adminPages[_selectedIndex].page,
     );
   }
 }
