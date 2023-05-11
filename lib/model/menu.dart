@@ -19,6 +19,7 @@ class Paket {
       nama: nama,
       pilihan: pilihan,
       baseHarga: baseHarga,
+      deskripsi: deskripsi,
     );
   }
 
