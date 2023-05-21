@@ -1,32 +1,51 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
+enum OrderStatus {
+  pending('Pending'),
+  accepted('Diambil'),
+  rejected('Ditolak'),
+  delivered('Diantar'),
+  canceled('Dibatalkan');
+
+  final String displayName;
+  const OrderStatus(this.displayName);
+}
+
 class Order {
-  final String noTelp;
+  final String username;
+  final String email;
+  final String photoUrl;
   final DateTime tanggal;
   final String alamat;
-  final int longitude;
-  final int latitude;
-  final List<OrderInfo> orderInfo;
+  final String catatan;
+  final OrderInfo orderInfo;
+  final OrderStatus status;
 
   // json (de)serialization
   Map<String, dynamic> toJson() => {
-        'noTelp': noTelp,
+        'username': username,
+        'email': email,
+        'photoUrl': photoUrl,
         'tanggal': tanggal.toIso8601String(),
         'alamat': alamat,
-        'longitude': longitude,
-        'latitude': latitude,
-        'orderInfo': orderInfo.map((e) => e.toJson()).toList(),
+        'orderInfo': orderInfo.toJson(),
+        'catatan': catatan ?? '',
+        'status': describeEnum(status),
       };
 
   Order.fromJson(Map<String, dynamic> json)
-      : noTelp = json['noTelp'],
-        tanggal = DateTime.parse(json['tanggal']),
+      : tanggal = DateTime.parse(json['tanggal']),
         alamat = json['alamat'],
-        longitude = json['longitude'],
-        latitude = json['latitude'],
-        orderInfo = json['orderInfo']
-            .map<OrderInfo>((e) => OrderInfo.fromJson(e))
-            .toList();
+        catatan = json['catatan'],
+        username = json['username'],
+        email = json['email'],
+        photoUrl = json['photoUrl'],
+        status = OrderStatus.values.firstWhereOrNull(
+              (e) => describeEnum(e) == (json['status'] ?? 'pending'),
+            ) ??
+            OrderStatus.pending,
+        orderInfo = OrderInfo.fromJson(json['orderInfo']);
 
   // equality check
   @override
@@ -34,32 +53,32 @@ class Order {
     if (identical(this, other)) return true;
 
     return other is Order &&
-        other.noTelp == noTelp &&
         other.tanggal == tanggal &&
         other.alamat == alamat &&
-        other.longitude == longitude &&
-        other.latitude == latitude &&
-        listEquals(other.orderInfo, orderInfo);
+        other.catatan == catatan &&
+        other.status == status &&
+        other.orderInfo == orderInfo;
   }
 
   @override
   int get hashCode {
-    return noTelp.hashCode ^
-        tanggal.hashCode ^
+    return tanggal.hashCode ^
         alamat.hashCode ^
-        longitude.hashCode ^
-        latitude.hashCode ^
+        catatan.hashCode ^
+        status.hashCode ^
         orderInfo.hashCode;
   }
 
   // constructor
   const Order({
-    required this.noTelp,
+    required this.username,
+    required this.email,
+    required this.photoUrl,
     required this.tanggal,
     required this.alamat,
-    required this.longitude,
-    required this.latitude,
+    required this.catatan,
     required this.orderInfo,
+    required this.status,
   });
 }
 

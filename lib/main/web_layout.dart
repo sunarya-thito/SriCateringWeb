@@ -14,28 +14,15 @@ class _WebLayoutState extends State<WebLayout> {
     return LayoutBuilder(
       builder: (context, constraints) {
         double width = constraints.maxWidth;
-        if (width < 540) {
-          return widget.builder(context, width);
+        if (width > 992) {
+          width = 992;
+        } else if (width > 768) {
+          width = 768;
+        } else if (width > 576) {
+          width = 576;
         }
-        if (width <= 576) {
-          return widget.builder(context, 540);
-        }
-        if (width <= 768) {
-          return widget.builder(context, 720);
-        }
-        if (width <= 992) {
-          return widget.builder(context, 960);
-        }
-        if (width <= 1200) {
-          return widget.builder(context, 960);
-        }
-        if (width <= 1440) {
-          return widget.builder(context, 1140);
-        }
-        if (width <= 1680) {
-          return widget.builder(context, 1366);
-        }
-        return widget.builder(context, 1600);
+        width = width - 48;
+        return widget.builder(context, width);
       },
     );
   }

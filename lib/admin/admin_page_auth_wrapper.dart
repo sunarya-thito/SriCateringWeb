@@ -1,5 +1,11 @@
+import 'dart:async';
+import 'dart:html';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sricatering/google_button.dart';
 
 class AdminPageAuthWrapper extends StatefulWidget {
   final Widget child;
@@ -33,105 +39,104 @@ class AdminAuth extends InheritedWidget {
 }
 
 class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  User? login;
+  late StreamSubscription<User?> _userChanges;
 
   @override
   void initState() {
     super.initState();
     var auth = FirebaseAuth.instance;
-    login = auth.currentUser;
+    _userChanges = auth.userChanges().listen((event) {
+      setState(() {});
+    });
+    if (auth.currentUser == null) {
+      auth
+          .signInWithPopup(GoogleAuthProvider().setCustomParameters({
+            'prompt': 'select_account',
+          }))
+          .then(_login)
+          .catchError((e) {
+        if (e is FirebaseAuthException) {
+          if (!mounted) return;
+          // show error dialog
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text(e.message ?? 'Unknown error'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      // reload web page
+                      window.location.reload();
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
+          );
+          return;
+        }
+        print(e);
+        if (!mounted) return;
+        // reload html page
+        GoRouter.of(context).go('/admin');
+      });
+    }
   }
 
-  void logout() {
-    setState(() {
-      var auth = FirebaseAuth.instance;
-      auth.signOut();
-      login = null;
-    });
+  @override
+  void dispose() {
+    _userChanges.cancel();
+    super.dispose();
+  }
+
+  void logout() async {
+    var auth = FirebaseAuth.instance;
+    await auth.signOut();
+  }
+
+  void _login(UserCredential userCredential) async {
+    var database = FirebaseFirestore.instance;
+    var userDoc = await database.doc('users/${userCredential.user!.uid}').get();
+    var data = userDoc.data();
+    if (data == null || data['admin'] != true) {
+      // show dialog not admin
+      if (!mounted) return;
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Not Admin'),
+            content: Text('You are not admin'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // reload web page
+                  window.location.reload();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    if (login != null) {
+    if (FirebaseAuth.instance.currentUser != null) {
       return AdminAuth(
         data: this,
         child: widget.child,
       );
     }
     return Material(
-      child: Container(
-        alignment: Alignment.center,
-        color: const Color(0xFF171C1E),
-        child: Card(
-          child: Container(
-            width: 600,
-            height: 800,
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text('Email'),
-                TextField(
-                  controller: _emailController,
-                ),
-                const SizedBox(height: 20),
-                Text('Password'),
-                TextField(
-                  controller: _passwordController,
-                ),
-                Spacer(),
-                TextButton(
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(
-                      const EdgeInsets.all(20),
-                    ),
-                  ),
-                  onPressed: () async {
-                    try {
-                      var auth = FirebaseAuth.instance;
-                      var email = _emailController.text;
-                      var password = _passwordController.text;
-                      var userCredential =
-                          await auth.signInWithEmailAndPassword(
-                        email: email,
-                        password: password,
-                      );
-                      setState(() {
-                        login = userCredential.user;
-                      });
-                    } catch (e) {
-                      if (e is FirebaseAuthException) {
-                        // display a dialog with the error message
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: const Text('Error'),
-                              content: Text(e.message ?? ''),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    }
-                  },
-                  child: const Text('Login'),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+      child: Center(child: CircularProgressIndicator()),
     );
   }
 }

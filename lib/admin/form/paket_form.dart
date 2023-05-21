@@ -6,6 +6,7 @@ import 'package:sricatering/admin/form/pilihan_paket_form.dart';
 import 'package:sricatering/model/database.dart';
 import 'package:sricatering/model/menu.dart';
 import 'package:sricatering/ui_util.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class PaketForm extends StatefulWidget {
   final Paket? paket;
@@ -16,6 +17,7 @@ class PaketForm extends StatefulWidget {
 }
 
 class _PaketFormState extends State<PaketForm> {
+  static final ImageProvider defaultImage = MemoryImage(kTransparentImage);
   final TextEditingController name = TextEditingController();
   final TextEditingController price = TextEditingController();
   final TextEditingController description = TextEditingController();
@@ -41,6 +43,7 @@ class _PaketFormState extends State<PaketForm> {
       {bool multiline = false, bool isNumber = false, bool required = true}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         required
             ? Text(
@@ -155,6 +158,8 @@ class _PaketFormState extends State<PaketForm> {
                     updatePaket(paket).then((value) {
                       if (image is MemoryImage) {
                         updateImageOfPaket(value, (image as MemoryImage).bytes);
+                      } else if (image == defaultImage) {
+                        deleteImageOfPaket(value);
                       }
                       // post frame
                       return value;
@@ -181,14 +186,23 @@ class _PaketFormState extends State<PaketForm> {
       body: Container(
         padding: const EdgeInsets.all(16),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Expanded(
                     child: GestureDetector(
                       onTap: () async {
+                        if (image is MemoryImage && image != defaultImage) {
+                          // hapus gambar
+                          setState(() {
+                            image = defaultImage;
+                          });
+                          return;
+                        }
                         FilePickerResult? result = await FilePicker.platform
                             .pickFiles(
                                 dialogTitle: 'Pilih Gambar',
@@ -233,6 +247,8 @@ class _PaketFormState extends State<PaketForm> {
                                   )
                                 : Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Icon(Icons.add),
                                       Text('Tambahkan Photo'),
@@ -241,19 +257,25 @@ class _PaketFormState extends State<PaketForm> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  createFormInput('Nama Paket', name),
-                  const SizedBox(height: 24),
-                  createFormInput('Harga', price, isNumber: true),
-                  const SizedBox(height: 24),
-                  createFormInput('Deskripsi', description,
-                      multiline: true, required: false),
+                  ListView(
+                    shrinkWrap: true,
+                    children: [
+                      const SizedBox(height: 16),
+                      createFormInput('Nama Paket', name),
+                      const SizedBox(height: 24),
+                      createFormInput('Harga', price, isNumber: true),
+                      const SizedBox(height: 24),
+                      createFormInput('Deskripsi', description,
+                          multiline: true, required: false),
+                    ],
+                  )
                 ],
               ),
             ),
             const SizedBox(width: 16),
             Flexible(
               child: ListView(
+                shrinkWrap: true,
                 children: [
                   ...pilihan.mapIndexed((i, e) {
                     return Padding(
