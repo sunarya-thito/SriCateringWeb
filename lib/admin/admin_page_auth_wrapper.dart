@@ -9,6 +9,29 @@ class AdminPageAuthWrapper extends StatefulWidget {
   _AdminPageAuthWrapperState createState() => _AdminPageAuthWrapperState();
 }
 
+class AdminAuth extends InheritedWidget {
+  final _AdminPageAuthWrapperState data;
+
+  const AdminAuth({
+    Key? key,
+    required Widget child,
+    required this.data,
+  }) : super(key: key, child: child);
+
+  static AdminAuth? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<AdminAuth>();
+  }
+
+  @override
+  bool updateShouldNotify(covariant AdminAuth oldWidget) {
+    return oldWidget.data != data;
+  }
+
+  void logout() {
+    data.logout();
+  }
+}
+
 class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -19,6 +42,12 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
     super.initState();
     var auth = FirebaseAuth.instance;
     login = auth.currentUser;
+  }
+
+  void logout() {
+    setState(() {
+      login = null;
+    });
   }
 
   @override

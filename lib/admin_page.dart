@@ -1,6 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sricatering/admin/admin_page_auth_wrapper.dart';
 import 'package:sricatering/admin/manage_paket_page.dart';
 
 class AdminPage extends StatefulWidget {
@@ -73,6 +74,7 @@ class _AdminPageState extends State<AdminPage> {
             ListTile(
               title: const Text('Logout'),
               onTap: () {
+                AdminAuth.of(context)?.logout();
                 Navigator.pop(context);
               },
             )
