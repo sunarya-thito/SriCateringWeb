@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sricatering/firebase_options.dart';
 import 'package:sricatering/model/database.dart';
 import 'package:sricatering/routes.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() async {
+  usePathUrlStrategy();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
