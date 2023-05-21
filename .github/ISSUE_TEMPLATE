@@ -1,0 +1,33 @@
+name: User Acceptance Test
+description: User Acceptance Test
+title: "[UAT]: "
+labels: test
+body:
+  - type: input
+    id: aplikasi
+    attributes:
+      label: Aplikasi
+    validations:
+      required: true
+  - type: input
+    id: akses_menu
+    attributes:
+      label: Akses Menu
+    validations:
+      required: true
+  - type: input
+    id: level_user
+    attributes:
+      label: Level User
+    validations:
+      required: true
+  - type: input
+    id: prakondisi
+    attributes:
+      label: Prakondisi
+  - type: input
+    id: langkah_langkah
+    attributes:
+      label: Langkah-langkah
+    validations:
+      required: true
