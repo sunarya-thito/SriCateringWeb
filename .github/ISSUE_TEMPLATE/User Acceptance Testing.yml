@@ -25,7 +25,7 @@ body:
     id: prakondisi
     attributes:
       label: Prakondisi
-  - type: input
+  - type: textarea
     id: langkah_langkah
     attributes:
       label: Langkah-langkah
