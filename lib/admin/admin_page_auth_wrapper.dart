@@ -46,6 +46,8 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
 
   void logout() {
     setState(() {
+      var auth = FirebaseAuth.instance;
+      auth.signOut();
       login = null;
     });
   }
@@ -53,7 +55,10 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
   @override
   Widget build(BuildContext context) {
     if (login != null) {
-      return widget.child;
+      return AdminAuth(
+        data: this,
+        child: widget.child,
+      );
     }
     return Material(
       child: Container(
@@ -98,7 +103,26 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
                         login = userCredential.user;
                       });
                     } catch (e) {
-                      print(e);
+                      if (e is FirebaseAuthException) {
+                        // display a dialog with the error message
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text('Error'),
+                              content: Text(e.message ?? ''),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
                     }
                   },
                   child: const Text('Login'),
