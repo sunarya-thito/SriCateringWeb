@@ -25,7 +25,7 @@ class PaketPage extends StatefulWidget {
 
 class _PaketPageState extends State<PaketPage> {
   late Future<Paket> _paketFuture;
-  Map<PilihanPaket, List<Makanan>> _pilihanPaket = {};
+  final Map<PilihanPaket, List<Makanan>> _pilihanPaket = {};
 
   final TextEditingController _catatanController = TextEditingController();
   final TextEditingController _alamatController = TextEditingController();
