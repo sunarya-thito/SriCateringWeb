@@ -198,15 +198,30 @@ class _StandardPageState extends State<StandardPage> {
                                 width: 300,
                                 child: Column(
                                   children: [
-                                    Text(
-                                        'Kampung Ciherang RT.02 RW.10 Banjaran, Kabupaten Bandung'),
+                                    GestureDetector(
+                                      onTap: () {
+                                        String url =
+                                            'https://www.google.com/maps/search/Kampung+Ciherang+RT.02+RW.10+Banjaran,+Kabupaten+Bandung/@-6.986646,107.643024,12z/data=!3m1!4b1';
+                                        window.open(url, 'maps');
+                                      },
+                                      child: Text(
+                                          'Kampung Ciherang RT.02 RW.10 Banjaran, Kabupaten Bandung'),
+                                    ),
                                     const SizedBox(height: 12),
-                                    Row(
-                                      children: [
-                                        Icon(Icons.phone, color: Colors.white),
-                                        const SizedBox(width: 8),
-                                        Text('0812-2343-3254'),
-                                      ],
+                                    GestureDetector(
+                                      onTap: () {
+                                        String url =
+                                            'https://wa.me/6281223433254?text=Halo%20Sri%20Catering,%20saya%20mau%20pesan%20catering%20untuk%20acara%20pernikahan%20saya.';
+                                        window.open(url, 'whatsapp');
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.phone,
+                                              color: Colors.white),
+                                          const SizedBox(width: 8),
+                                          Text('0812-2343-3254'),
+                                        ],
+                                      ),
                                     )
                                   ],
                                 ),
