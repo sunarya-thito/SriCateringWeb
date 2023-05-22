@@ -210,10 +210,10 @@ class _StandardPageState extends State<StandardPage> {
                                                 );
                                               },
                                               child: Row(
-                                                children: [
-                                                  const Text('Login'),
-                                                  const SizedBox(width: 8),
-                                                  const Icon(Icons.login),
+                                                children: const [
+                                                  Text('Login'),
+                                                  SizedBox(width: 8),
+                                                  Icon(Icons.login),
                                                 ],
                                               ),
                                             ),
@@ -271,11 +271,11 @@ class _StandardPageState extends State<StandardPage> {
                                             window.open(url, 'whatsapp');
                                           },
                                           child: Row(
-                                            children: [
-                                              const Icon(Icons.phone,
+                                            children: const [
+                                              Icon(Icons.phone,
                                                   color: Colors.white),
-                                              const SizedBox(width: 8),
-                                              const Text('0812-2343-3254'),
+                                              SizedBox(width: 8),
+                                              Text('0812-2343-3254'),
                                             ],
                                           ),
                                         ),

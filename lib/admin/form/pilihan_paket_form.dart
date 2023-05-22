@@ -205,9 +205,9 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.add),
-                  const Text('Tambahkan Makanan'),
+                children: const [
+                  Icon(Icons.add),
+                  Text('Tambahkan Makanan'),
                 ],
               ),
             ),

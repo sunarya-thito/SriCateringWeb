@@ -250,9 +250,9 @@ class _PaketFormState extends State<PaketForm> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    children: [
-                                      const Icon(Icons.add),
-                                      const Text('Tambahkan Photo'),
+                                    children: const [
+                                      Icon(Icons.add),
+                                      Text('Tambahkan Photo'),
                                     ],
                                   ),
                       ),
@@ -308,9 +308,9 @@ class _PaketFormState extends State<PaketForm> {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.add),
-                        const Text('Tambahkan Opsi'),
+                      children: const [
+                        Icon(Icons.add),
+                        Text('Tambahkan Opsi'),
                       ],
                     ),
                   ),

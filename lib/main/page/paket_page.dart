@@ -227,8 +227,8 @@ class _PaketPageState extends State<PaketPage> {
                         height: 8,
                       ),
                       Row(
-                        children: [
-                          const Expanded(
+                        children: const [
+                          Expanded(
                             child: Text(
                               'Catatan',
                               style: TextStyle(
@@ -238,7 +238,7 @@ class _PaketPageState extends State<PaketPage> {
                               ),
                             ),
                           ),
-                          const Text(
+                          Text(
                             '*opsional',
                             style: TextStyle(
                               fontSize: 16,
@@ -290,8 +290,8 @@ class _PaketPageState extends State<PaketPage> {
                         height: 8,
                       ),
                       Row(
-                        children: [
-                          const Expanded(
+                        children: const [
+                          Expanded(
                             child: Text(
                               'Alamat',
                               style: TextStyle(
