@@ -6,7 +6,8 @@ Dibuat guna memenuhi tugas Pemrograman Web Lanjut serta memenuhi kebutuhan dan k
 * 152021081 - M. Krisna Yudha
 * 152021086 - Bani Faza Naufal
 
-# Cara Build
+### Setup
+Projek ini menggunakan Firebase, untuk itu perlu dilakukan beberapa setup terlebih dahulu.
 - [x] Clone repository ini
 - [x] Buka terminal
 - [x] Masuk ke direktori repository ini
@@ -14,7 +15,7 @@ Dibuat guna memenuhi tugas Pemrograman Web Lanjut serta memenuhi kebutuhan dan k
 - [x] Buat atau pilih project firebase
 - [x] Pilih firestore, storage, dan authentication
 
-# Cara Setting Deploy
+### Setting Deploy Firebase Hosting
 - [x] Buka terminal
 - [x] Masuk ke direktori repository ini
 - [x] Ketik `firebase init`
@@ -23,8 +24,7 @@ Dibuat guna memenuhi tugas Pemrograman Web Lanjut serta memenuhi kebutuhan dan k
 - [x] Pilih `N` untuk konfigurasi sebagai single-page app
 - [x] Pilih `N` untuk overwrite `index.html`
 
-# Cara Deploy
+### Cara Deploy
 - [x] Buka terminal
 - [x] Masuk ke direktori repository ini
-- [x] Ketik `flutter build web`
-- [x] Ketik `firebase deploy`
+- [x] Ketik `deploy`
