@@ -67,15 +67,6 @@ Future<Widget> getImageOfPaketId(String paketId, bool show) async {
         }
         return Container(
           color: kHeaderColor,
-          child: Center(
-            child: SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
-            ),
-          ),
         );
       },
     );
