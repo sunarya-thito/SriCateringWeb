@@ -191,7 +191,7 @@ class _OrderCardState extends State<OrderCard> {
                       height: 2,
                     ),
                     Text(
-                      '${formatRupiahCurrency(kalkulasiHarga(widget.order))}',
+                      formatRupiahCurrency(kalkulasiHarga(widget.order)),
                       style: const TextStyle(fontSize: 14, color: Colors.black54),
                     ),
                     const SizedBox(
