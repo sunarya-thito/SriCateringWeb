@@ -23,4 +23,4 @@ Admin Sudah Login ke Situs dan Sudah Terdapat Data Menu Makanan
 5. Tekan ikon "save" yang terletak pada bagian kanan atas tampilan pengguna
 
 ### Status
-Sistem berhasil menambahkan opsi makanan pada data pemesanan pelanggan 
+Sistem berhasil menambahkan opsi makanan pada data pada halaman menu makanan
