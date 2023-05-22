@@ -1,0 +1,1 @@
+flutter run lib/main.dart --web-browser-flag "--disable-web-security" -d chrome
