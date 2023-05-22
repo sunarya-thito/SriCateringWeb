@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sricatering/main/page/home_page.dart';
-import 'package:sricatering/main/web_layout.dart';
+import 'package:sricatering/web_layout.dart';
 import 'package:sricatering/ui_util.dart';
 import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 
