@@ -143,8 +143,7 @@ class _StandardPageState extends State<StandardPage> {
                                                 context.go('/me');
                                               },
                                               style: TextButton.styleFrom(
-                                                primary: Colors.white,
-                                                padding: const EdgeInsets.only(
+                                                foregroundColor: Colors.white, padding: const EdgeInsets.only(
                                                   left: 16,
                                                   right: 0,
                                                   top: 8,
@@ -171,8 +170,7 @@ class _StandardPageState extends State<StandardPage> {
                                             )
                                           : TextButton(
                                               style: TextButton.styleFrom(
-                                                primary: Colors.white,
-                                                padding: const EdgeInsets.only(
+                                                foregroundColor: Colors.white, padding: const EdgeInsets.only(
                                                   left: 16,
                                                   right: 16,
                                                   top: 8,
