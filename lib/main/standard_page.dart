@@ -106,7 +106,7 @@ class _StandardPageState extends State<StandardPage> {
                                     ((height - kToolbarHeight) / 200)
                                         .clamp(0, 0.5)),
                                 alignment: Alignment.bottomCenter,
-                                child: Container(
+                                child: SizedBox(
                                   width: width,
                                   child: Row(
                                     children: [
@@ -229,7 +229,7 @@ class _StandardPageState extends State<StandardPage> {
                         child: Container(
                           alignment: Alignment.center,
                           color: kBackgroundColor,
-                          child: Container(
+                          child: SizedBox(
                             width: width,
                             child: widget.child,
                           ),
@@ -245,7 +245,7 @@ class _StandardPageState extends State<StandardPage> {
                             width: width,
                             child: Row(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 300,
                                   child: Column(
                                     children: [
