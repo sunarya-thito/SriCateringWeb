@@ -355,8 +355,8 @@ class _PaketPageState extends State<PaketPage> {
                           const SizedBox(
                             width: 8,
                           ),
-                          SizedBox(
-                            width: 150,
+                          ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: 100),
                             child: TextField(
                               controller: _amountController,
                               onChanged: (v) {
@@ -403,74 +403,82 @@ class _PaketPageState extends State<PaketPage> {
                               maxLines: 1,
                             ),
                           ),
-                          Spacer(),
-                          FlatButton(
-                              child: Text(
-                                'Pesan Sekarang - ${formatRupiahCurrency(kalkulasiHarga(snapshot.data!))}',
-                                textAlign: TextAlign.center,
-                              ),
-                              onPressed: !valid(snapshot.data!)
-                                  ? null
-                                  : () async {
-                                      var user =
-                                          FirebaseAuth.instance.currentUser;
-                                      if (user == null) {
-                                        await FirebaseAuth.instance
-                                            .signInWithPopup(
-                                                GoogleAuthProvider()
-                                                    .setCustomParameters({
-                                          'prompt': 'select_account',
-                                        }));
-                                        return;
-                                      }
-                                      Paket paket = snapshot.data!;
-                                      List<order.OrderPilihanPaket> pilihan =
-                                          _pilihanPaket.entries
-                                              .map((e) =>
-                                                  order.OrderPilihanPaket(
-                                                      nama: e.key.nama,
-                                                      makanan:
-                                                          e.value.map((mak) {
-                                                        return order
-                                                            .OrderMakanan(
-                                                                nama: mak.nama,
-                                                                harga:
-                                                                    mak.harga);
-                                                      }).toList()))
-                                              .toList();
-                                      order.OrderPaket orderPaket =
-                                          order.OrderPaket(
-                                              nama: paket.nama,
-                                              baseHarga: paket.baseHarga,
-                                              deskripsi: paket.deskripsi,
-                                              pilihan: pilihan);
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Expanded(
+                            child: FlatButton(
+                                child: Text(
+                                  'Pesan Sekarang - ${formatRupiahCurrency(kalkulasiHarga(snapshot.data!))}',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                ),
+                                onPressed: !valid(snapshot.data!)
+                                    ? null
+                                    : () async {
+                                        var user =
+                                            FirebaseAuth.instance.currentUser;
+                                        if (user == null) {
+                                          await FirebaseAuth.instance
+                                              .signInWithPopup(
+                                                  GoogleAuthProvider()
+                                                      .setCustomParameters({
+                                            'prompt': 'select_account',
+                                          }));
+                                          return;
+                                        }
+                                        Paket paket = snapshot.data!;
+                                        List<order.OrderPilihanPaket> pilihan =
+                                            _pilihanPaket.entries
+                                                .map((e) =>
+                                                    order.OrderPilihanPaket(
+                                                        nama: e.key.nama,
+                                                        makanan:
+                                                            e.value.map((mak) {
+                                                          return order
+                                                              .OrderMakanan(
+                                                                  nama:
+                                                                      mak.nama,
+                                                                  harga: mak
+                                                                      .harga);
+                                                        }).toList()))
+                                                .toList();
+                                        order.OrderPaket orderPaket =
+                                            order.OrderPaket(
+                                                nama: paket.nama,
+                                                baseHarga: paket.baseHarga,
+                                                deskripsi: paket.deskripsi,
+                                                pilihan: pilihan);
 
-                                      order.OrderInfo info = order.OrderInfo(
-                                          paket: orderPaket,
-                                          jumlah: int.tryParse(
-                                                  _amountController.text) ??
-                                              1);
+                                        order.OrderInfo info = order.OrderInfo(
+                                            paket: orderPaket,
+                                            jumlah: int.tryParse(
+                                                    _amountController.text) ??
+                                                1);
 
-                                      order.Order d = order.Order(
-                                          username: user.displayName ?? '',
-                                          email: user.email ?? '',
-                                          photoUrl: user.photoURL ?? '',
-                                          orderInfo: info,
-                                          alamat: _alamatController.text,
-                                          catatan: _catatanController.text,
-                                          status: OrderStatus.pending,
-                                          tanggal: DateTime.now());
+                                        order.Order d = order.Order(
+                                            username: user.displayName ?? '',
+                                            email: user.email ?? '',
+                                            photoUrl: user.photoURL ?? '',
+                                            orderInfo: info,
+                                            alamat: _alamatController.text,
+                                            catatan: _catatanController.text,
+                                            status: OrderStatus.pending,
+                                            tanggal: DateTime.now());
 
-                                      var db = FirebaseFirestore.instance;
-                                      var colRef = db
-                                          .collection('users')
-                                          .doc(user.uid)
-                                          .collection('orders');
-                                      if (mounted) {
-                                        context.go('/me');
-                                      }
-                                      await colRef.add(d.toJson());
-                                    }),
+                                        var db = FirebaseFirestore.instance;
+                                        var colRef = db
+                                            .collection('users')
+                                            .doc(user.uid)
+                                            .collection('orders');
+                                        if (mounted) {
+                                          context.go('/me');
+                                        }
+                                        await colRef.add(d.toJson());
+                                      }),
+                          ),
                         ],
                       ),
                     ],
