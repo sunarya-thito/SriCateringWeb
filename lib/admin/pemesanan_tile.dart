@@ -102,7 +102,8 @@ class _PemesananTileState extends State<PemesananTile> {
                 DropdownButton<ord.OrderStatus>(
                   items: ord.OrderStatus.values
                       .map((e) => DropdownMenuItem(
-                          child: Text(e.displayName), value: e))
+                          value: e,
+                          child: Text(e.displayName)))
                       .toList(),
                   value: widget.order.status,
                   onChanged: (value) {
