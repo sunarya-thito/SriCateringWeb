@@ -35,7 +35,7 @@ const List<PageItem> adminPages = [
   ),
   PageItem(
     path: 'pemesanan',
-    label: 'Pemesanan',
+    label: 'Pemesanan.md',
     page: PemesananPage(),
   ),
 ];
