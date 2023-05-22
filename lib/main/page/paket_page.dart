@@ -87,7 +87,7 @@ class _PaketPageState extends State<PaketPage> {
                     child: Container(
                       color: kHeaderColor,
                       child: FutureBuilder(
-                        future: getImageOfPaket(snapshot.data!),
+                        future: getImageOfPaket(snapshot.data!, true),
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
                             return Hero(
@@ -447,6 +447,7 @@ class _PaketPageState extends State<PaketPage> {
                                                 .toList();
                                         order.OrderPaket orderPaket =
                                             order.OrderPaket(
+                                                paketId: paket.id,
                                                 nama: paket.nama,
                                                 baseHarga: paket.baseHarga,
                                                 deskripsi: paket.deskripsi,

@@ -91,7 +91,7 @@ class _PaketTileState extends State<PaketTile> {
               }
               return const SizedBox();
             },
-            future: getImageOfPaket(widget.paket),
+            future: getImageOfPaket(widget.paket, false),
           ),
         ),
       ),

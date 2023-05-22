@@ -115,6 +115,7 @@ class OrderInfo {
 }
 
 class OrderPaket {
+  final String paketId;
   final String nama;
   final int baseHarga;
   final String deskripsi;
@@ -122,6 +123,7 @@ class OrderPaket {
 
   // json (de)serialization
   Map<String, dynamic> toJson() => {
+        'paketId': paketId,
         'nama': nama,
         'baseHarga': baseHarga,
         'deskripsi': deskripsi,
@@ -130,6 +132,7 @@ class OrderPaket {
 
   OrderPaket.fromJson(Map<String, dynamic> json)
       : nama = json['nama'],
+        paketId = json['paketId'],
         baseHarga = json['baseHarga'],
         deskripsi = json['deskripsi'],
         pilihan = json['pilihan']
@@ -140,6 +143,7 @@ class OrderPaket {
 
   const OrderPaket({
     required this.nama,
+    required this.paketId,
     required this.baseHarga,
     required this.deskripsi,
     required this.pilihan,

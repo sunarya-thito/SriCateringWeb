@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sricatering/main/page/home_page.dart';
 import 'package:sricatering/main/page/paket_card.dart';
+import 'package:sricatering/model/database.dart';
 import 'package:sricatering/model/order.dart';
 
 class OrderCard extends StatefulWidget {
@@ -37,154 +38,183 @@ class _OrderCardState extends State<OrderCard> {
           SizedBox(
             height: 2,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (widget.order.orderInfo.paket.deskripsi.isNotEmpty)
-                    Text(
-                      widget.order.orderInfo.paket.deskripsi,
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
-                    ),
-                  if (widget.order.orderInfo.paket.pilihan.isNotEmpty &&
-                      widget.order.orderInfo.paket.deskripsi.isNotEmpty)
-                    SizedBox(
-                      height: 8,
-                    ),
-                  if (widget.order.orderInfo.paket.pilihan.isNotEmpty)
-                    Text(
-                      'Pilihan Menu',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: kHeaderColor),
-                    ),
-                  if (widget.order.orderInfo.paket.pilihan.isNotEmpty)
-                    SizedBox(
-                      height: 2,
-                    ),
-                  ...widget.order.orderInfo.paket.pilihan.map((e) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          e.nama,
-                          style: TextStyle(fontSize: 14, color: Colors.black54),
-                        ),
-                        SizedBox(
-                          height: 2,
-                        ),
-                        ...e.makanan.map((m) {
-                          return Text(
-                            m.nama,
+          IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Expanded(
+                    child: ClipRRect(
+                  clipBehavior: Clip.antiAlias,
+                  borderRadius: BorderRadius.circular(8),
+                  child: FutureBuilder(
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return FittedBox(
+                            fit: BoxFit.cover, child: snapshot.data!);
+                      }
+                      return Container(
+                          color: kHeaderColor,
+                          height: 200,
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                            ),
+                          ));
+                    },
+                    future: getImageOfPaketId(
+                        widget.order.orderInfo.paket.paketId, true),
+                  ),
+                )),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (widget.order.orderInfo.paket.deskripsi.isNotEmpty)
+                      Text(
+                        widget.order.orderInfo.paket.deskripsi,
+                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                      ),
+                    if (widget.order.orderInfo.paket.pilihan.isNotEmpty &&
+                        widget.order.orderInfo.paket.deskripsi.isNotEmpty)
+                      SizedBox(
+                        height: 8,
+                      ),
+                    if (widget.order.orderInfo.paket.pilihan.isNotEmpty)
+                      Text(
+                        'Pilihan Menu',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: kHeaderColor),
+                      ),
+                    if (widget.order.orderInfo.paket.pilihan.isNotEmpty)
+                      SizedBox(
+                        height: 2,
+                      ),
+                    ...widget.order.orderInfo.paket.pilihan.map((e) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            e.nama,
                             style:
                                 TextStyle(fontSize: 14, color: Colors.black54),
-                          );
-                        }).toList(),
-                        SizedBox(
-                          height: 8,
-                        ),
-                      ],
-                    );
-                  }),
-                  if (widget.order.catatan.isNotEmpty)
-                    SizedBox(
-                      height: 8,
-                    ),
-                  if (widget.order.catatan.isNotEmpty)
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          ...e.makanan.map((m) {
+                            return Text(
+                              m.nama,
+                              style: TextStyle(
+                                  fontSize: 14, color: Colors.black54),
+                            );
+                          }).toList(),
+                          SizedBox(
+                            height: 8,
+                          ),
+                        ],
+                      );
+                    }),
+                    if (widget.order.catatan.isNotEmpty)
+                      SizedBox(
+                        height: 8,
+                      ),
+                    if (widget.order.catatan.isNotEmpty)
+                      Text(
+                        'Catatan',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: kHeaderColor),
+                      ),
+                    if (widget.order.catatan.isNotEmpty)
+                      SizedBox(
+                        height: 2,
+                      ),
+                    if (widget.order.catatan.isNotEmpty)
+                      Text(
+                        widget.order.catatan,
+                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                      ),
+                  ],
+                )),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
-                      'Catatan',
+                      'Pengiriman',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kHeaderColor),
                     ),
-                  if (widget.order.catatan.isNotEmpty)
                     SizedBox(
                       height: 2,
                     ),
-                  if (widget.order.catatan.isNotEmpty)
                     Text(
-                      widget.order.catatan,
+                      widget.order.alamat,
                       style: TextStyle(fontSize: 14, color: Colors.black54),
                     ),
-                ],
-              )),
-              Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Pengiriman',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: kHeaderColor),
-                  ),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    widget.order.alamat,
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Jumlah',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: kHeaderColor),
-                  ),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    widget.order.orderInfo.jumlah.toString(),
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Total',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: kHeaderColor),
-                  ),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    '${formatRupiahCurrency(kalkulasiHarga(widget.order))}',
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                  ),
-                  SizedBox(
-                    height: 8,
-                  ),
-                  Text(
-                    'Status',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: kHeaderColor),
-                  ),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    widget.order.status.displayName,
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                  ),
-                ],
-              ))
-            ],
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Jumlah',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: kHeaderColor),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      widget.order.orderInfo.jumlah.toString(),
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Total',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: kHeaderColor),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      '${formatRupiahCurrency(kalkulasiHarga(widget.order))}',
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Status',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: kHeaderColor),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      widget.order.status.displayName,
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                    ),
+                  ],
+                ))
+              ],
+            ),
           ),
         ],
       ),

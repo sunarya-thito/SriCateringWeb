@@ -228,7 +228,8 @@ class _PaketFormState extends State<PaketForm> {
                               )
                             : widget.paket != null
                                 ? FutureBuilder(
-                                    future: getImageOfPaket(widget.paket!),
+                                    future:
+                                        getImageOfPaket(widget.paket!, false),
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData) {
                                         return ClipRRect(

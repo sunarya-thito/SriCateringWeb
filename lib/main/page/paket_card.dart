@@ -54,7 +54,7 @@ class _PaketCardState extends State<PaketCard> {
                   height: 220,
                   color: kHeaderColor,
                   child: FutureBuilder(
-                    future: getImageOfPaket(widget.paket),
+                    future: getImageOfPaket(widget.paket, false),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return AnimatedScale(
