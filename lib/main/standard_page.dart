@@ -78,101 +78,125 @@ class _StandardPageState extends State<StandardPage> {
                       floating: true,
                       pinned: true,
                       expandedHeight: 200,
-                      flexibleSpace: Container(
-                        color: kHeaderColor,
-                        alignment: Alignment.bottomCenter,
-                        child: Container(
-                          width: width,
-                          child: Row(
-                            children: [
-                              MouseRegion(
-                                cursor: SystemMouseCursors.click,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    context.go('/');
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(12.0),
-                                        child: Image.asset(
-                                          'assets/logo_white.png',
-                                          height: 80,
+                      collapsedHeight: kToolbarHeight,
+                      flexibleSpace:
+                          LayoutBuilder(builder: (context, constraints) {
+                        double height = constraints.biggest.height;
+                        return Stack(
+                          clipBehavior: Clip.hardEdge,
+                          fit: StackFit.expand,
+                          children: [
+                            FittedBox(
+                              fit: BoxFit.cover,
+                              clipBehavior: Clip.hardEdge,
+                              child: Image.asset(
+                                'assets/header.jpg',
+                              ),
+                            ),
+                            Container(
+                              color: kHeaderColor.withOpacity(1 -
+                                  ((height - kToolbarHeight) / 200)
+                                      .clamp(0, 0.5)),
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                width: width,
+                                child: Row(
+                                  children: [
+                                    MouseRegion(
+                                      cursor: SystemMouseCursors.click,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          context.go('/');
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(12.0),
+                                              child: Image.asset(
+                                                'assets/logo_white.png',
+                                                height: 80,
+                                              ),
+                                            ),
+                                            Text(
+                                              'SRI CATERING',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Text(
-                                        'SRI CATERING',
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                    Spacer(),
+                                    profilePicture != null
+                                        ? TextButton(
+                                            onPressed: () {
+                                              context.go('/me');
+                                            },
+                                            style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: const EdgeInsets.only(
+                                                left: 16,
+                                                right: 0,
+                                                top: 8,
+                                                bottom: 8,
+                                              ),
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                Text(profileName ?? ''),
+                                                const SizedBox(width: 8),
+                                                CircleAvatar(
+                                                  foregroundImage: NetworkImage(
+                                                      profilePicture),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : IconButton(
+                                            color: Colors.white,
+                                            onPressed: () {
+                                              FirebaseAuth.instance
+                                                  .signInWithPopup(
+                                                      GoogleAuthProvider()
+                                                          .setCustomParameters({
+                                                'prompt': 'select_account',
+                                              }))
+                                                  .catchError(
+                                                (e) {
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title: Text('Error'),
+                                                        content: Text(e
+                                                                .message ??
+                                                            'Unknown error'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                            child: Text('OK'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                              );
+                                            },
+                                            icon: const Icon(Icons.login),
+                                          ),
+                                  ],
                                 ),
                               ),
-                              Spacer(),
-                              profilePicture != null
-                                  ? TextButton(
-                                      onPressed: () {
-                                        context.go('/me');
-                                      },
-                                      style: TextButton.styleFrom(
-                                        primary: Colors.white,
-                                        padding: const EdgeInsets.only(
-                                          left: 16,
-                                          right: 0,
-                                          top: 8,
-                                          bottom: 8,
-                                        ),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Text(profileName ?? ''),
-                                          const SizedBox(width: 8),
-                                          CircleAvatar(
-                                            foregroundImage:
-                                                NetworkImage(profilePicture),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : IconButton(
-                                      color: Colors.white,
-                                      onPressed: () {
-                                        FirebaseAuth.instance
-                                            .signInWithPopup(
-                                                GoogleAuthProvider()
-                                                    .setCustomParameters({
-                                          'prompt': 'select_account',
-                                        }))
-                                            .catchError(
-                                          (e) {
-                                            showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  title: Text('Error'),
-                                                  content: Text(e.message ??
-                                                      'Unknown error'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () {
-                                                        Navigator.pop(context);
-                                                      },
-                                                      child: Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            );
-                                          },
-                                        );
-                                      },
-                                      icon: const Icon(Icons.login),
-                                    ),
-                            ],
-                          ),
-                        ),
-                      ),
+                            ),
+                          ],
+                        );
+                      }),
                     ),
                     SliverToBoxAdapter(
                       child: Container(
