@@ -136,10 +136,10 @@ class _PaketPageState extends State<PaketPage> {
                         ),
                       ),
                       ...snapshot.data!.pilihan.map((e) {
-                        List<Makanan>? _pil = _pilihanPaket[e];
-                        if (_pil == null) {
-                          _pil = [];
-                          _pilihanPaket[e] = _pil;
+                        List<Makanan>? pil = _pilihanPaket[e];
+                        if (pil == null) {
+                          pil = [];
+                          _pilihanPaket[e] = pil;
                         }
                         return Column(
                           mainAxisSize: MainAxisSize.min,
@@ -196,19 +196,19 @@ class _PaketPageState extends State<PaketPage> {
                                 padding: const EdgeInsets.only(top: 8),
                                 child: PilihanButton(
                                     makanan: makanan,
-                                    selected: _pil!.contains(makanan),
+                                    selected: pil!.contains(makanan),
                                     onTap: (selected) {
                                       if (!selected) {
-                                        if (_pil!.length + 1 > e.maksimal) {
+                                        if (pil!.length + 1 > e.maksimal) {
                                           // remove first
-                                          _pil.removeAt(0);
+                                          pil.removeAt(0);
                                         }
                                         setState(() {
-                                          _pil!.add(makanan);
+                                          pil!.add(makanan);
                                         });
                                       } else {
                                         setState(() {
-                                          _pil!.remove(makanan);
+                                          pil!.remove(makanan);
                                         });
                                       }
                                     }),
