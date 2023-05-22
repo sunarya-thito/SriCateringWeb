@@ -408,13 +408,6 @@ class _PaketPageState extends State<PaketPage> {
                           ),
                           Expanded(
                             child: FlatButton(
-                                child: Text(
-                                  'Pesan Sekarang - ${formatRupiahCurrency(kalkulasiHarga(snapshot.data!))}',
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  softWrap: false,
-                                ),
                                 onPressed: !valid(snapshot.data!)
                                     ? null
                                     : () async {
@@ -478,7 +471,14 @@ class _PaketPageState extends State<PaketPage> {
                                           context.go('/me');
                                         }
                                         await colRef.add(d.toJson());
-                                      }),
+                                      },
+                                child: Text(
+                                  'Pesan Sekarang - ${formatRupiahCurrency(kalkulasiHarga(snapshot.data!))}',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                )),
                           ),
                         ],
                       ),
