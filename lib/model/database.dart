@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:sricatering/main/page/home_page.dart';
 import 'package:sricatering/model/menu.dart';
 import 'package:sricatering/model/order.dart' as order;
 import 'package:event_bus_plus/event_bus_plus.dart';
+import 'package:sricatering/ui_util.dart';
 
 IEventBus databaseEventBus = EventBus();
 
@@ -47,20 +49,50 @@ void initializeDatabase() {
   });
 }
 
-Map<Paket, Widget> _cachedImage = {};
-Future<Widget> getImageOfPaket(Paket paket) async {
-  Widget? cached = _cachedImage[paket];
-  if (cached != null) {
-    return cached;
-  }
+Future<Widget> getImageOfPaket(Paket paket, bool show) {
+  return getImageOfPaketId(paket.id, show);
+}
+
+Future<Widget> getImageOfPaketId(String paketId, bool show) async {
   // dapatkan url gambar dari paket
   final storage = FirebaseStorage.instance;
-  final ref = storage.ref().child('paket/${paket.id}.jpg');
+  final ref = storage.ref().child('paket/$paketId.jpg');
   try {
     final downloadUrl = await ref.getDownloadURL();
-    var image2 = Image(image: NetworkImage(downloadUrl));
-    _cachedImage[paket] = image2;
-    return image2;
+    var image2 = Image(
+      image: NetworkImage(downloadUrl),
+      loadingBuilder: (context, child, loadingProgress) {
+        if (loadingProgress == null) {
+          return child;
+        }
+        return Container(
+          color: kHeaderColor,
+          child: Center(
+            child: SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    var mouseRegion = MouseRegion(
+      cursor: show ? SystemMouseCursors.click : MouseCursor.defer,
+      child: Builder(builder: (context) {
+        return GestureDetector(
+          onTap: show
+              ? () {
+                  showPaketImageOverlay(context, image2);
+                }
+              : null,
+          child: image2,
+        );
+      }),
+    );
+    return mouseRegion;
   } catch (e) {
     return Container(
       padding: EdgeInsets.all(24),
