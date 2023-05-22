@@ -6,6 +6,14 @@ Dibuat guna memenuhi tugas Pemrograman Web Lanjut serta memenuhi kebutuhan dan k
 * 152021081 - M. Krisna Yudha
 * 152021086 - Bani Faza Naufal
 
+### Hosting
+Projek ini dihosting menggunakan Firebase.
+Menggunakan produk Firebase:
+* Hosting untuk hosting web
+* Authentication untuk autentikasi lewat Google
+* Firestore untuk database
+* Storage untuk menyimpan gambar
+
 ### Setup
 Projek ini menggunakan Firebase, untuk itu perlu dilakukan beberapa setup terlebih dahulu.
 - [x] Clone repository ini
