@@ -1,16 +1,30 @@
-# sricatering
+# Sri Catering Web
+Dibuat guna memenuhi tugas Pemrograman Web Lanjut serta memenuhi kebutuhan dan keinginan dari Sri Catering
 
-Website Sri Catering
+## Anggota Kelompok
+* 152021083 - Thito Yalasatria Sunarya
+* 152021081 - M. Krisna Yudha
+* 152021086 - Bani Faza Naufal
 
-## Getting Started
+# Cara Build
+- [x] Clone repository ini
+- [x] Buka terminal
+- [x] Masuk ke direktori repository ini
+- [x] Ketik `firebase init`
+- [x] Buat atau pilih project firebase
+- [x] Pilih firestore, storage, dan authentication
 
-This project is a starting point for a Flutter application.
+# Cara Setting Deploy
+- [x] Buka terminal
+- [x] Masuk ke direktori repository ini
+- [x] Ketik `firebase init`
+- [x] Pilih hosting
+- [x] Untuk direktori public, isi dengan `build/web`
+- [x] Pilih `N` untuk konfigurasi sebagai single-page app
+- [x] Pilih `N` untuk overwrite `index.html`
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Cara Deploy
+- [x] Buka terminal
+- [x] Masuk ke direktori repository ini
+- [x] Ketik `flutter build web`
+- [x] Ketik `firebase deploy`
