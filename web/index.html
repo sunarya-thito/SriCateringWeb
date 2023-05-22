@@ -38,8 +38,113 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  <style>
+    .app-loader-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 9999;
+    }
+    /* app logo fade in */
+    .app-logo {
+        opacity: 0;
+
+    }
+
+    .app-motto {
+        opacity: 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+      font-family: 'Arial',serif;
+        color: #000000;
+        margin-top: 1rem;
+
+    }
+
+    .app-logo-fade-in {
+      animation-name: app-logo-fade-in;
+      animation-duration: 2s;
+      animation-delay: 0.5s;
+      animation-fill-mode: forwards;
+    }
+
+    .app-motto-fade-in {
+      animation-name: app-logo-fade-in;
+      animation-duration: 2s;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes app-logo-fade-in {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* app logo fade out */
+    .app-logo-fade-out {
+        opacity: 1;
+        animation-name: app-logo-fade-out;
+        animation-duration: 1s;
+        animation-delay: 0.5s;
+        animation-fill-mode: forwards;
+    }
+
+    .app-motto-fade-out {
+        opacity: 1;
+        animation-name: app-logo-fade-out;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+
+    .app-loader-container-fade-out {
+        opacity: 1;
+        animation-name: app-loader-container-fade-out;
+        animation-duration: 1s;
+        animation-delay: 1.5s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes app-loader-container-fade-out {
+        from {
+            opacity: 1;
+            display: flex;
+            pointer-events: all;
+        }
+        to {
+            opacity: 0;
+            display: none;
+            pointer-events: none;
+        }
+    }
+
+    @keyframes app-logo-fade-out {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+  </style>
 </head>
 <body>
+  <div class="app-loader-container">
+    <img src="logo.png" class="app-logo app-logo-fade-in">
+    <div class="app-motto app-motto-fade-in">
+      Berkah Rasa, Berkah Rezeki
+    </div>
+  </div>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js

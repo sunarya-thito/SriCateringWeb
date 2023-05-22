@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sricatering/firebase_options.dart';
@@ -13,8 +15,27 @@ void main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    var cssClassSet = window.document.querySelector('.app-logo')!.classes;
+    cssClassSet.add('app-logo-fade-out');
+    cssClassSet.remove('app-logo-fade-in');
+    cssClassSet = window.document.querySelector('.app-motto')!.classes;
+    cssClassSet.add('app-motto-fade-out');
+    cssClassSet.remove('app-motto-fade-in');
+    cssClassSet =
+        window.document.querySelector('.app-loader-container')!.classes;
+    cssClassSet.add('app-loader-container-fade-out');
+  }
 
   // This widget is the root of your application.
   @override
