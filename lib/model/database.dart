@@ -15,7 +15,7 @@ IEventBus databaseEventBus = EventBus();
 class PaketListUpdated extends AppEvent {
   final List<Paket> pakets;
 
-  PaketListUpdated(this.pakets);
+  const PaketListUpdated(this.pakets);
 
   @override
   List<Object?> get props => pakets;
@@ -24,7 +24,7 @@ class PaketListUpdated extends AppEvent {
 class OrderListUpdated extends AppEvent {
   final Map<String, order.Order> orders;
 
-  OrderListUpdated(this.orders);
+  const OrderListUpdated(this.orders);
 
   @override
   List<Object?> get props => [orders];
