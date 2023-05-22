@@ -43,7 +43,7 @@ class _PaketCardState extends State<PaketCard> {
           context.go('/paket/${widget.paket.id}');
         },
         child: Container(
-          constraints: BoxConstraints(maxWidth: 300),
+          constraints: const BoxConstraints(maxWidth: 300),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -76,9 +76,9 @@ class _PaketCardState extends State<PaketCard> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(widget.paket.nama, style: TextStyle(color: Colors.black54)),
+              Text(widget.paket.nama, style: const TextStyle(color: Colors.black54)),
               Text('${formatRupiahCurrency(widget.paket.baseHarga)}/Porsi',
-                  style: TextStyle(color: Colors.black, fontSize: 20)),
+                  style: const TextStyle(color: Colors.black, fontSize: 20)),
             ],
           ),
         ),

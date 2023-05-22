@@ -55,7 +55,7 @@ class _MakananFormState extends State<MakananForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Nama Makanan',
                       maxLines: 1,
                       overflow: TextOverflow.fade,
@@ -85,7 +85,7 @@ class _MakananFormState extends State<MakananForm> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Harga',
                       maxLines: 1,
                       overflow: TextOverflow.fade,
@@ -121,7 +121,7 @@ class _MakananFormState extends State<MakananForm> {
                   onPressed: () {
                     widget.onChanged(null);
                   },
-                  icon: Icon(Icons.delete)),
+                  icon: const Icon(Icons.delete)),
             ],
           ),
         ),

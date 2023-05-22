@@ -19,7 +19,7 @@ class _OrderCardState extends State<OrderCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
@@ -32,10 +32,10 @@ class _OrderCardState extends State<OrderCard> {
         children: [
           Text(
             widget.order.orderInfo.paket.nama,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, color: kHeaderColor),
           ),
-          SizedBox(
+          const SizedBox(
             height: 2,
           ),
           IntrinsicHeight(
@@ -75,15 +75,15 @@ class _OrderCardState extends State<OrderCard> {
                     if (widget.order.orderInfo.paket.deskripsi.isNotEmpty)
                       Text(
                         widget.order.orderInfo.paket.deskripsi,
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                        style: const TextStyle(fontSize: 14, color: Colors.black54),
                       ),
                     if (widget.order.orderInfo.paket.pilihan.isNotEmpty &&
                         widget.order.orderInfo.paket.deskripsi.isNotEmpty)
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                     if (widget.order.orderInfo.paket.pilihan.isNotEmpty)
-                      Text(
+                      const Text(
                         'Pilihan Menu',
                         style: TextStyle(
                             fontSize: 16,
@@ -91,7 +91,7 @@ class _OrderCardState extends State<OrderCard> {
                             color: kHeaderColor),
                       ),
                     if (widget.order.orderInfo.paket.pilihan.isNotEmpty)
-                      SizedBox(
+                      const SizedBox(
                         height: 2,
                       ),
                     ...widget.order.orderInfo.paket.pilihan.map((e) {
@@ -101,30 +101,30 @@ class _OrderCardState extends State<OrderCard> {
                           Text(
                             e.nama,
                             style:
-                                TextStyle(fontSize: 14, color: Colors.black54),
+                                const TextStyle(fontSize: 14, color: Colors.black54),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 2,
                           ),
                           ...e.makanan.map((m) {
                             return Text(
                               m.nama,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 14, color: Colors.black54),
                             );
                           }).toList(),
-                          SizedBox(
+                          const SizedBox(
                             height: 8,
                           ),
                         ],
                       );
                     }),
                     if (widget.order.catatan.isNotEmpty)
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                     if (widget.order.catatan.isNotEmpty)
-                      Text(
+                      const Text(
                         'Catatan',
                         style: TextStyle(
                             fontSize: 16,
@@ -132,13 +132,13 @@ class _OrderCardState extends State<OrderCard> {
                             color: kHeaderColor),
                       ),
                     if (widget.order.catatan.isNotEmpty)
-                      SizedBox(
+                      const SizedBox(
                         height: 2,
                       ),
                     if (widget.order.catatan.isNotEmpty)
                       Text(
                         widget.order.catatan,
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                        style: const TextStyle(fontSize: 14, color: Colors.black54),
                       ),
                   ],
                 )),
@@ -146,70 +146,70 @@ class _OrderCardState extends State<OrderCard> {
                     child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Pengiriman',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kHeaderColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text(
                       widget.order.alamat,
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                      style: const TextStyle(fontSize: 14, color: Colors.black54),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text(
+                    const Text(
                       'Jumlah',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kHeaderColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text(
                       widget.order.orderInfo.jumlah.toString(),
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                      style: const TextStyle(fontSize: 14, color: Colors.black54),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text(
+                    const Text(
                       'Total',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kHeaderColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text(
                       '${formatRupiahCurrency(kalkulasiHarga(widget.order))}',
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                      style: const TextStyle(fontSize: 14, color: Colors.black54),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Text(
+                    const Text(
                       'Status',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                           color: kHeaderColor),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 2,
                     ),
                     Text(
                       widget.order.status.displayName,
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
+                      style: const TextStyle(fontSize: 14, color: Colors.black54),
                     ),
                   ],
                 ))

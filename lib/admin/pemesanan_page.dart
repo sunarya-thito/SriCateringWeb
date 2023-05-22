@@ -47,7 +47,7 @@ class _PemesananPageState extends State<PemesananPage> {
             }).toList(),
           );
         }
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },

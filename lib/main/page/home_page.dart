@@ -43,12 +43,12 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Daftar Paket',
             style: TextStyle(
                 color: kHeaderColor, fontWeight: FontWeight.bold, fontSize: 32),
           ),
-          Text(
+          const Text(
             'Pilih Paket Catering yang cocok untuk acara anda',
             style: TextStyle(color: Colors.black54, fontSize: 16),
           ),
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 height: 200,
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   color: kHeaderColor,
                 ),
               );

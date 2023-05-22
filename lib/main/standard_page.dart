@@ -77,7 +77,7 @@ class _StandardPageState extends State<StandardPage> {
                   child: CustomScrollView(
                     controller: _scrollController,
                     physics: const NeverScrollableScrollPhysics(),
-                    scrollBehavior: ScrollBehavior().copyWith(
+                    scrollBehavior: const ScrollBehavior().copyWith(
                       overscroll: false,
                       scrollbars: true,
                     ),
@@ -126,7 +126,7 @@ class _StandardPageState extends State<StandardPage> {
                                                   height: 80,
                                                 ),
                                               ),
-                                              Text(
+                                              const Text(
                                                 'SRI CATERING',
                                                 style: TextStyle(
                                                     color: Colors.white,
@@ -136,7 +136,7 @@ class _StandardPageState extends State<StandardPage> {
                                           ),
                                         ),
                                       ),
-                                      Spacer(),
+                                      const Spacer(),
                                       profilePicture != null
                                           ? TextButton(
                                               onPressed: () {
@@ -190,7 +190,7 @@ class _StandardPageState extends State<StandardPage> {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: Text('Error'),
+                                                          title: const Text('Error'),
                                                           content: Text(e
                                                                   .message ??
                                                               'Unknown error'),
@@ -200,7 +200,7 @@ class _StandardPageState extends State<StandardPage> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child: Text('OK'),
+                                                              child: const Text('OK'),
                                                             ),
                                                           ],
                                                         );
@@ -210,9 +210,9 @@ class _StandardPageState extends State<StandardPage> {
                                                 );
                                               },
                                               child: Row(
-                                                children: [
+                                                children: const [
                                                   Text('Login'),
-                                                  const SizedBox(width: 8),
+                                                  SizedBox(width: 8),
                                                   Icon(Icons.login),
                                                 ],
                                               ),
@@ -257,7 +257,7 @@ class _StandardPageState extends State<StandardPage> {
                                                 'https://www.google.com/maps/search/Kampung+Ciherang+RT.02+RW.10+Banjaran,+Kabupaten+Bandung/@-6.986646,107.643024,12z/data=!3m1!4b1';
                                             window.open(url, 'maps');
                                           },
-                                          child: Text(
+                                          child: const Text(
                                               'Kampung Ciherang RT.02 RW.10 Banjaran, Kabupaten Bandung'),
                                         ),
                                       ),
@@ -271,10 +271,10 @@ class _StandardPageState extends State<StandardPage> {
                                             window.open(url, 'whatsapp');
                                           },
                                           child: Row(
-                                            children: [
+                                            children: const [
                                               Icon(Icons.phone,
                                                   color: Colors.white),
-                                              const SizedBox(width: 8),
+                                              SizedBox(width: 8),
                                               Text('0812-2343-3254'),
                                             ],
                                           ),
