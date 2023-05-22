@@ -58,8 +58,13 @@ class _StandardPageState extends State<StandardPage> {
     String? profilePicture = this.profilePicture();
     return Material(
       child: Theme(
-        data: ThemeData.light(useMaterial3: true)
-            .copyWith(textTheme: GoogleFonts.interTextTheme()),
+        data: ThemeData.light(useMaterial3: true).copyWith(
+            textTheme: GoogleFonts.interTextTheme(),
+            textSelectionTheme: TextSelectionThemeData(
+              cursorColor: kHeaderColor,
+              selectionColor: kHeaderColor.withOpacity(0.3),
+              selectionHandleColor: kHeaderColor,
+            )),
         child: Container(
           color: kHeaderColor,
           child: WebLayout(
@@ -154,8 +159,16 @@ class _StandardPageState extends State<StandardPage> {
                                               ],
                                             ),
                                           )
-                                        : IconButton(
-                                            color: Colors.white,
+                                        : TextButton(
+                                            style: TextButton.styleFrom(
+                                              primary: Colors.white,
+                                              padding: const EdgeInsets.only(
+                                                left: 16,
+                                                right: 16,
+                                                top: 8,
+                                                bottom: 8,
+                                              ),
+                                            ),
                                             onPressed: () {
                                               FirebaseAuth.instance
                                                   .signInWithPopup(
@@ -188,7 +201,13 @@ class _StandardPageState extends State<StandardPage> {
                                                 },
                                               );
                                             },
-                                            icon: const Icon(Icons.login),
+                                            child: Row(
+                                              children: [
+                                                Text('Login'),
+                                                const SizedBox(width: 8),
+                                                Icon(Icons.login),
+                                              ],
+                                            ),
                                           ),
                                   ],
                                 ),
