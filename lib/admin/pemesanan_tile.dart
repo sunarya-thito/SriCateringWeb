@@ -46,8 +46,8 @@ class _PemesananTileState extends State<PemesananTile> {
       leading: CircleAvatar(
         foregroundImage: NetworkImage(widget.order.photoUrl),
       ),
-      childrenPadding: EdgeInsets.all(16),
-      tilePadding: EdgeInsets.all(8),
+      childrenPadding: const EdgeInsets.all(16),
+      tilePadding: const EdgeInsets.all(8),
       title: Text(
           'Pesanan ${widget.order.username} (${widget.order.orderInfo.paket.nama})'),
       children: [
@@ -57,28 +57,28 @@ class _PemesananTileState extends State<PemesananTile> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text('Email', style: TextStyle(fontWeight: FontWeight.bold)),
                 SelectableText(widget.order.email),
-                SizedBox(height: 8),
-                Text('Tanggal', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                const Text('Tanggal', style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(widget.order.tanggal.toString()),
-                SizedBox(height: 8),
-                Text('Alamat', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                const Text('Alamat', style: TextStyle(fontWeight: FontWeight.bold)),
                 SelectableText(widget.order.alamat),
-                SizedBox(height: 8),
-                Text('Catatan', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                const Text('Catatan', style: TextStyle(fontWeight: FontWeight.bold)),
                 SelectableText(widget.order.catatan),
-                SizedBox(height: 8),
-                Text('Jumlah', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                const Text('Jumlah', style: TextStyle(fontWeight: FontWeight.bold)),
                 Text(widget.order.orderInfo.jumlah.toString()),
-                SizedBox(height: 8),
-                Text('Total', style: TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 8),
+                const Text('Total', style: TextStyle(fontWeight: FontWeight.bold)),
                 SelectableText(formatRupiahCurrency(kalkulasiHarga(
                     widget.order.orderInfo.paket,
                     widget.order.orderInfo.jumlah))),
               ],
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -87,22 +87,23 @@ class _PemesananTileState extends State<PemesananTile> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(pil.nama,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: pil.makanan.map((makanan) {
                           return Text(makanan.nama);
                         }).toList(),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                     ],
                   );
                 }).toList(),
-                Text('Status', style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text('Status', style: TextStyle(fontWeight: FontWeight.bold)),
                 DropdownButton<ord.OrderStatus>(
                   items: ord.OrderStatus.values
                       .map((e) => DropdownMenuItem(
-                          child: Text(e.displayName), value: e))
+                          value: e,
+                          child: Text(e.displayName)))
                       .toList(),
                   value: widget.order.status,
                   onChanged: (value) {

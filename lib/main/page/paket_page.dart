@@ -25,7 +25,7 @@ class PaketPage extends StatefulWidget {
 
 class _PaketPageState extends State<PaketPage> {
   late Future<Paket> _paketFuture;
-  Map<PilihanPaket, List<Makanan>> _pilihanPaket = {};
+  final Map<PilihanPaket, List<Makanan>> _pilihanPaket = {};
 
   final TextEditingController _catatanController = TextEditingController();
   final TextEditingController _alamatController = TextEditingController();
@@ -74,7 +74,7 @@ class _PaketPageState extends State<PaketPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Container(
-            padding: EdgeInsets.symmetric(vertical: 48),
+            padding: const EdgeInsets.symmetric(vertical: 48),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -98,7 +98,7 @@ class _PaketPageState extends State<PaketPage> {
                           return Container(
                             alignment: Alignment.center,
                             height: 500,
-                            child: CircularProgressIndicator(
+                            child: const CircularProgressIndicator(
                               color: Colors.white,
                             ),
                           );
@@ -107,7 +107,7 @@ class _PaketPageState extends State<PaketPage> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 24,
                 ),
                 Flexible(
@@ -117,41 +117,41 @@ class _PaketPageState extends State<PaketPage> {
                     children: [
                       Text(
                         snapshot.data!.nama,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: kHeaderColor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Text(
                         snapshot.data!.deskripsi.isEmpty
                             ? 'Tidak ada deskripsi'
                             : snapshot.data!.deskripsi,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.black54,
                         ),
                       ),
                       ...snapshot.data!.pilihan.map((e) {
-                        List<Makanan>? _pil = _pilihanPaket[e];
-                        if (_pil == null) {
-                          _pil = [];
-                          _pilihanPaket[e] = _pil;
+                        List<Makanan>? pil = _pilihanPaket[e];
+                        if (pil == null) {
+                          pil = [];
+                          _pilihanPaket[e] = pil;
                         }
                         return Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
-                            Divider(
+                            const Divider(
                               color: kHeaderColor,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 8,
                             ),
                             Row(
@@ -159,7 +159,7 @@ class _PaketPageState extends State<PaketPage> {
                                 Expanded(
                                   child: Text(
                                     e.nama,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       color: kHeaderColor,
@@ -169,7 +169,7 @@ class _PaketPageState extends State<PaketPage> {
                                 e.minimal > 0
                                     ? Text(
                                         '*min ${e.minimal}',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 16,
                                           color: Colors.black54,
                                         ),
@@ -177,12 +177,12 @@ class _PaketPageState extends State<PaketPage> {
                                     : e.maksimal > 0
                                         ? Text(
                                             '*maks ${e.maksimal}',
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontSize: 16,
                                               color: Colors.black54,
                                             ),
                                           )
-                                        : Text(
+                                        : const Text(
                                             '*opsional',
                                             style: TextStyle(
                                               fontSize: 16,
@@ -196,19 +196,19 @@ class _PaketPageState extends State<PaketPage> {
                                 padding: const EdgeInsets.only(top: 8),
                                 child: PilihanButton(
                                     makanan: makanan,
-                                    selected: _pil!.contains(makanan),
+                                    selected: pil!.contains(makanan),
                                     onTap: (selected) {
                                       if (!selected) {
-                                        if (_pil!.length + 1 > e.maksimal) {
+                                        if (pil!.length + 1 > e.maksimal) {
                                           // remove first
-                                          _pil.removeAt(0);
+                                          pil.removeAt(0);
                                         }
                                         setState(() {
-                                          _pil!.add(makanan);
+                                          pil!.add(makanan);
                                         });
                                       } else {
                                         setState(() {
-                                          _pil!.remove(makanan);
+                                          pil!.remove(makanan);
                                         });
                                       }
                                     }),
@@ -217,17 +217,17 @@ class _PaketPageState extends State<PaketPage> {
                           ],
                         );
                       }).toList(),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Divider(
+                      const Divider(
                         color: kHeaderColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Catatan',
@@ -247,28 +247,28 @@ class _PaketPageState extends State<PaketPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       TextField(
                         controller: _catatanController,
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: kHeaderColor,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: kHeaderColor,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: kHeaderColor,
                               width: 2,
                             ),
@@ -280,17 +280,17 @@ class _PaketPageState extends State<PaketPage> {
                         maxLines: 3,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Divider(
+                      const Divider(
                         color: kHeaderColor,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Alamat',
@@ -303,7 +303,7 @@ class _PaketPageState extends State<PaketPage> {
                           ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       TextField(
@@ -313,21 +313,21 @@ class _PaketPageState extends State<PaketPage> {
                         },
                         decoration: InputDecoration(
                           focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: kHeaderColor,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: kHeaderColor,
                               width: 2,
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: kHeaderColor,
                               width: 2,
                             ),
@@ -339,12 +339,12 @@ class _PaketPageState extends State<PaketPage> {
                         maxLines: 3,
                         maxLengthEnforcement: MaxLengthEnforcement.enforced,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
                       Row(
                         children: [
-                          Text(
+                          const Text(
                             'Jumlah Item',
                             style: TextStyle(
                               fontSize: 16,
@@ -356,7 +356,7 @@ class _PaketPageState extends State<PaketPage> {
                             width: 8,
                           ),
                           ConstrainedBox(
-                            constraints: BoxConstraints(maxWidth: 100),
+                            constraints: const BoxConstraints(maxWidth: 100),
                             child: TextField(
                               controller: _amountController,
                               onChanged: (v) {
@@ -374,26 +374,26 @@ class _PaketPageState extends State<PaketPage> {
                                 });
                               },
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
+                                contentPadding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 12),
-                                constraints: BoxConstraints(minHeight: 0),
+                                constraints: const BoxConstraints(minHeight: 0),
                                 isDense: true,
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: kHeaderColor,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: kHeaderColor,
                                     width: 2,
                                   ),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 border: OutlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: kHeaderColor,
                                     width: 2,
                                   ),
@@ -408,13 +408,6 @@ class _PaketPageState extends State<PaketPage> {
                           ),
                           Expanded(
                             child: FlatButton(
-                                child: Text(
-                                  'Pesan Sekarang - ${formatRupiahCurrency(kalkulasiHarga(snapshot.data!))}',
-                                  textAlign: TextAlign.center,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  softWrap: false,
-                                ),
                                 onPressed: !valid(snapshot.data!)
                                     ? null
                                     : () async {
@@ -478,7 +471,14 @@ class _PaketPageState extends State<PaketPage> {
                                           context.go('/me');
                                         }
                                         await colRef.add(d.toJson());
-                                      }),
+                                      },
+                                child: Text(
+                                  'Pesan Sekarang - ${formatRupiahCurrency(kalkulasiHarga(snapshot.data!))}',
+                                  textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  softWrap: false,
+                                )),
                           ),
                         ],
                       ),
@@ -492,7 +492,7 @@ class _PaketPageState extends State<PaketPage> {
         return Container(
           alignment: Alignment.center,
           height: 500,
-          child: CircularProgressIndicator(
+          child: const CircularProgressIndicator(
             color: kHeaderColor,
           ),
         );

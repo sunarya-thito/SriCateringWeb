@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,7 +14,7 @@ IEventBus databaseEventBus = EventBus();
 class PaketListUpdated extends AppEvent {
   final List<Paket> pakets;
 
-  PaketListUpdated(this.pakets);
+  const PaketListUpdated(this.pakets);
 
   @override
   List<Object?> get props => pakets;
@@ -24,7 +23,7 @@ class PaketListUpdated extends AppEvent {
 class OrderListUpdated extends AppEvent {
   final Map<String, order.Order> orders;
 
-  OrderListUpdated(this.orders);
+  const OrderListUpdated(this.orders);
 
   @override
   List<Object?> get props => [orders];
@@ -86,8 +85,8 @@ Future<Widget> getImageOfPaketId(String paketId, bool show) async {
     return mouseRegion;
   } catch (e) {
     return Container(
-      padding: EdgeInsets.all(24),
-      child: Icon(
+      padding: const EdgeInsets.all(24),
+      child: const Icon(
         Icons.image,
         color: Colors.white,
       ),

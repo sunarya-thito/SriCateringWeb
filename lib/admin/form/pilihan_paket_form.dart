@@ -69,7 +69,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Nama Pilihan',
                           maxLines: 1,
                           overflow: TextOverflow.fade,
@@ -99,7 +99,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                   Flexible(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Minimal Pilih',
                           maxLines: 1,
                           overflow: TextOverflow.fade,
@@ -134,7 +134,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
                   Flexible(
                     child: Column(
                       children: [
-                        Text(
+                        const Text(
                           'Maksimal Pilih',
                           maxLines: 1,
                           overflow: TextOverflow.fade,
@@ -205,7 +205,7 @@ class _PilihanPaketFormState extends State<PilihanPaketForm> {
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Icon(Icons.add),
                   Text('Tambahkan Makanan'),
                 ],
