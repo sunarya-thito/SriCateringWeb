@@ -12,12 +12,12 @@ Umum
 
 ### Prakondisi
 
-Sudah Login sebagai admin
+-
 
 ### Langkah-langkah
 
-1. Isi email dan password dengan akun bukan admin
-2. Klik tombol login
+1. Klik tombol login
+2. Login dengan akun google bukan admin
 
 ### Status
 Berhasil masuk dan sistem mengarahkan pada halaman utama
