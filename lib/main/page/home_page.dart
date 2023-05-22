@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:sricatering/main/page/paket_card.dart';
 import 'package:sricatering/model/database.dart';
 import 'package:sricatering/model/menu.dart';
