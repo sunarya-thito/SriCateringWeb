@@ -66,6 +66,12 @@ class _AdminPageState extends State<AdminPage> {
                 child: Text('SRI CATERING'),
               ),
             ),
+            ListTile(
+              title: const Text('Halaman Utama'),
+              onTap: () {
+                context.go('/');
+              },
+            ),
             ...adminPages.mapIndexed((index, item) {
               return ListTile(
                 title: Text(item.label),
