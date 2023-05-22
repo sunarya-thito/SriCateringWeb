@@ -26,15 +26,20 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    var cssClassSet = window.document.querySelector('.app-logo')!.classes;
-    cssClassSet.add('app-logo-fade-out');
-    cssClassSet.remove('app-logo-fade-in');
-    cssClassSet = window.document.querySelector('.app-motto')!.classes;
-    cssClassSet.add('app-motto-fade-out');
-    cssClassSet.remove('app-motto-fade-in');
-    cssClassSet =
-        window.document.querySelector('.app-loader-container')!.classes;
-    cssClassSet.add('app-loader-container-fade-out');
+    Future.delayed(
+      Duration(seconds: 2),
+      () {
+        var cssClassSet = window.document.querySelector('.app-logo')!.classes;
+        cssClassSet.add('app-logo-fade-out');
+        cssClassSet.remove('app-logo-fade-in');
+        cssClassSet = window.document.querySelector('.app-motto')!.classes;
+        cssClassSet.add('app-motto-fade-out');
+        cssClassSet.remove('app-motto-fade-in');
+        cssClassSet =
+            window.document.querySelector('.app-loader-container')!.classes;
+        cssClassSet.add('app-loader-container-fade-out');
+      },
+    );
   }
 
   // This widget is the root of your application.
