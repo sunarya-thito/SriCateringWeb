@@ -61,7 +61,7 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Error'),
+                title: const Text('Error'),
                 content: Text(e.message ?? 'Unknown error'),
                 actions: [
                   TextButton(
@@ -69,7 +69,7 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
                       // reload web page
                       window.location.reload();
                     },
-                    child: Text('OK'),
+                    child: const Text('OK'),
                   ),
                 ],
               );
@@ -107,15 +107,15 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Not Admin'),
-            content: Text('You are not admin'),
+            title: const Text('Not Admin'),
+            content: const Text('You are not admin'),
             actions: [
               TextButton(
                 onPressed: () {
                   // reload web page
                   window.location.reload();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -134,7 +134,7 @@ class _AdminPageAuthWrapperState extends State<AdminPageAuthWrapper> {
         child: widget.child,
       );
     }
-    return Material(
+    return const Material(
       child: Center(child: CircularProgressIndicator()),
     );
   }

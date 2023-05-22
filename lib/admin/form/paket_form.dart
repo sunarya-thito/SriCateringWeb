@@ -125,12 +125,12 @@ class _PaketFormState extends State<PaketForm> {
                     }).whenComplete(() {
                       // show snackbar
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Berhasil mengubah paket'),
                         ),
                       );
                       Future.delayed(
-                        Duration(milliseconds: 500),
+                        const Duration(milliseconds: 500),
                         () {
                           context.go('/admin/manage_paket');
                         },
@@ -166,12 +166,12 @@ class _PaketFormState extends State<PaketForm> {
                     }).whenComplete(() {
                       // show snackbar
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Berhasil mengubah paket'),
                         ),
                       );
                       Future.delayed(
-                        Duration(milliseconds: 500),
+                        const Duration(milliseconds: 500),
                         () {
                           context.go('/admin/manage_paket');
                         },
@@ -179,7 +179,7 @@ class _PaketFormState extends State<PaketForm> {
                     }));
               }
             },
-            icon: Icon(Icons.save),
+            icon: const Icon(Icons.save),
           ),
         ],
       ),
@@ -251,8 +251,8 @@ class _PaketFormState extends State<PaketForm> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      Icon(Icons.add),
-                                      Text('Tambahkan Photo'),
+                                      const Icon(Icons.add),
+                                      const Text('Tambahkan Photo'),
                                     ],
                                   ),
                       ),
@@ -309,8 +309,8 @@ class _PaketFormState extends State<PaketForm> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.add),
-                        Text('Tambahkan Opsi'),
+                        const Icon(Icons.add),
+                        const Text('Tambahkan Opsi'),
                       ],
                     ),
                   ),

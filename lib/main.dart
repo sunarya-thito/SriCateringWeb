@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () {
         var cssClassSet = window.document.querySelector('.app-logo')!.classes;
         cssClassSet.add('app-logo-fade-out');

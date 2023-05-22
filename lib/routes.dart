@@ -16,7 +16,7 @@ import 'main/page/paket_page.dart';
 GoRouter router = GoRouter(routes: [
   GoRoute(
     path: '/',
-    pageBuilder: (context, state) => MaterialPage(
+    pageBuilder: (context, state) => const MaterialPage(
       child: StandardPage(key: Key('HomePage'), child: HomePage()),
     ),
   ),
@@ -36,9 +36,9 @@ GoRouter router = GoRouter(routes: [
   GoRoute(
     path: '/me',
     pageBuilder: (context, state) {
-      return MaterialPage(
+      return const MaterialPage(
         child: StandardPage(
-          key: const ValueKey('MePage'),
+          key: ValueKey('MePage'),
           child: OrderPage(),
         ),
       );
@@ -63,7 +63,7 @@ GoRouter router = GoRouter(routes: [
       }),
       GoRoute(
         path: 'pemesanan',
-        pageBuilder: (context, state) => MaterialPage(
+        pageBuilder: (context, state) => const MaterialPage(
           child: AdminPageAuthWrapper(
             child: PemesananPage(),
           ),

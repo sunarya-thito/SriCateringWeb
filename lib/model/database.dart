@@ -86,8 +86,8 @@ Future<Widget> getImageOfPaketId(String paketId, bool show) async {
     return mouseRegion;
   } catch (e) {
     return Container(
-      padding: EdgeInsets.all(24),
-      child: Icon(
+      padding: const EdgeInsets.all(24),
+      child: const Icon(
         Icons.image,
         color: Colors.white,
       ),

@@ -82,7 +82,7 @@ class _OrderPageState extends State<OrderPage> {
       return Container(
         height: 800,
         alignment: Alignment.center,
-        child: Text(
+        child: const Text(
           'Anda belum login',
           style: TextStyle(
               fontSize: 24, fontWeight: FontWeight.bold, color: kHeaderColor),
@@ -106,7 +106,7 @@ class _OrderPageState extends State<OrderPage> {
               Expanded(
                 child: Text(
                   profileName() ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: kHeaderColor),
@@ -155,7 +155,7 @@ class _OrderPageState extends State<OrderPage> {
             height: 16,
           ),
           // header "Pesanan Saya"
-          Text(
+          const Text(
             'Pesanan Saya',
             style: TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, color: kHeaderColor),
@@ -194,7 +194,7 @@ class _OrderPageState extends State<OrderPage> {
               return Container(
                 height: 800,
                 alignment: Alignment.center,
-                child: CircularProgressIndicator(),
+                child: const CircularProgressIndicator(),
               );
             },
           )

@@ -31,7 +31,7 @@ class _PaketTileState extends State<PaketTile> {
     return ExpansionTile(
       title: Text(widget.paket.nama),
       subtitle: Text(widget.paket.id),
-      childrenPadding: EdgeInsets.all(16),
+      childrenPadding: const EdgeInsets.all(16),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -39,7 +39,7 @@ class _PaketTileState extends State<PaketTile> {
             onPressed: () {
               context.go('/admin/edit_paket?paket=${widget.paket.id}');
             },
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
           ),
           IconButton(
             onPressed: () {
@@ -49,13 +49,13 @@ class _PaketTileState extends State<PaketTile> {
                   return AlertDialog(
                     title: Text('Hapus Paket ${widget.paket.nama}?'),
                     content:
-                        Text('Paket yang dihapus tidak dapat dikembalikan'),
+                        const Text('Paket yang dihapus tidak dapat dikembalikan'),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Text('Batal'),
+                        child: const Text('Batal'),
                       ),
                       TextButton(
                         onPressed: () {
@@ -64,14 +64,14 @@ class _PaketTileState extends State<PaketTile> {
                           Navigator.pop(context);
                           setState(() {});
                         },
-                        child: Text('Hapus'),
+                        child: const Text('Hapus'),
                       ),
                     ],
                   );
                 },
               );
             },
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             color: Colors.red,
           ),
         ],
@@ -97,33 +97,33 @@ class _PaketTileState extends State<PaketTile> {
       ),
       children: [
         ListTile(
-          title: Text('Harga'),
+          title: const Text('Harga'),
           subtitle: Text(widget.paket.baseHarga.toString()),
         ),
         ListTile(
-          title: Text('Deskripsi'),
+          title: const Text('Deskripsi'),
           subtitle: Text(widget.paket.deskripsi),
         ),
         ...widget.paket.pilihan.map((e) {
           return ExpansionTile(
               title: Text(e.nama),
-              childrenPadding: EdgeInsets.all(16),
+              childrenPadding: const EdgeInsets.all(16),
               children: [
                 ListTile(
-                  title: Text('Minimal'),
+                  title: const Text('Minimal'),
                   subtitle: Text(e.minimal.toString()),
                 ),
                 ListTile(
-                  title: Text('Maksimal'),
+                  title: const Text('Maksimal'),
                   subtitle: Text(e.maksimal.toString()),
                 ),
                 ...e.makanan.map((m) {
                   return ExpansionTile(
                       title: Text(m.nama),
-                      childrenPadding: EdgeInsets.all(16),
+                      childrenPadding: const EdgeInsets.all(16),
                       children: [
                         ListTile(
-                          title: Text('Harga'),
+                          title: const Text('Harga'),
                           subtitle: Text(m.harga.toString()),
                         ),
                       ]);
