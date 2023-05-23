@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 
+import 'package:dyn_mouse_scroll/dyn_mouse_scroll.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -8,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sricatering/main/page/home_page.dart';
 import 'package:sricatering/web_layout.dart';
 import 'package:sricatering/ui_util.dart';
-import 'package:web_smooth_scroll/web_smooth_scroll.dart';
 
 class StandardPage extends StatefulWidget {
   final Widget child;
@@ -19,7 +19,6 @@ class StandardPage extends StatefulWidget {
 }
 
 class _StandardPageState extends State<StandardPage> {
-  final ScrollController _scrollController = ScrollController();
   late StreamSubscription _userChanges;
 
   @override
@@ -72,15 +71,10 @@ class _StandardPageState extends State<StandardPage> {
             builder: (context, width) {
               return WebContainerWidth(
                 width: width,
-                child: WebSmoothScroll(
-                  controller: _scrollController,
-                  child: CustomScrollView(
-                    controller: _scrollController,
-                    physics: const NeverScrollableScrollPhysics(),
-                    scrollBehavior: const ScrollBehavior().copyWith(
-                      overscroll: false,
-                      scrollbars: true,
-                    ),
+                child: DynMouseScroll(builder: (context, controller, physics) {
+                  return CustomScrollView(
+                    controller: controller,
+                    physics: physics,
                     slivers: [
                       SliverAppBar(
                         floating: true,
@@ -143,7 +137,8 @@ class _StandardPageState extends State<StandardPage> {
                                                 context.go('/me');
                                               },
                                               style: TextButton.styleFrom(
-                                                foregroundColor: Colors.white, padding: const EdgeInsets.only(
+                                                foregroundColor: Colors.white,
+                                                padding: const EdgeInsets.only(
                                                   left: 16,
                                                   right: 0,
                                                   top: 8,
@@ -170,7 +165,8 @@ class _StandardPageState extends State<StandardPage> {
                                             )
                                           : TextButton(
                                               style: TextButton.styleFrom(
-                                                foregroundColor: Colors.white, padding: const EdgeInsets.only(
+                                                foregroundColor: Colors.white,
+                                                padding: const EdgeInsets.only(
                                                   left: 16,
                                                   right: 16,
                                                   top: 8,
@@ -190,7 +186,8 @@ class _StandardPageState extends State<StandardPage> {
                                                       context: context,
                                                       builder: (context) {
                                                         return AlertDialog(
-                                                          title: const Text('Error'),
+                                                          title: const Text(
+                                                              'Error'),
                                                           content: Text(e
                                                                   .message ??
                                                               'Unknown error'),
@@ -200,7 +197,8 @@ class _StandardPageState extends State<StandardPage> {
                                                                 Navigator.pop(
                                                                     context);
                                                               },
-                                                              child: const Text('OK'),
+                                                              child: const Text(
+                                                                  'OK'),
                                                             ),
                                                           ],
                                                         );
@@ -289,8 +287,8 @@ class _StandardPageState extends State<StandardPage> {
                         ),
                       ),
                     ],
-                  ),
-                ),
+                  );
+                }),
               );
             },
           ),
