@@ -45,8 +45,8 @@ dependencies:
   go_router: ^7.0.0
   file_picker: ^5.3.0
   transparent_image: ^2.0.1
-  web_smooth_scroll: ^1.1.0
   google_fonts: ^4.0.4
+  dyn_mouse_scroll: ^1.0.7
 
 dev_dependencies:
   flutter_test:
